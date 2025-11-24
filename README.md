@@ -1,41 +1,18 @@
 # SRegionProtector
-SRegionProtector is a nukkit plugin that allows players to protect their regions.
-## Download
-* [NukkitX.com](https://nukkitx.com/resources/sregionprotector.164/)
-* [GoogleDrive](https://drive.google.com/file/d/17y1987s7YitfpL2mGQ9ele3dACSSFwea/view?usp=sharing)
-* [All versions](https://drive.google.com/drive/folders/1Z98RAPGY-7NK49ktsBYkZgafUB50r7NC?usp=sharing)
+SRegionProtector is a PowerNukkitX plugin that allows players to protect their regions.
+## [Download](https://github.com/PowerNukkitX-Bundle/SRegionProtector/releases/tag/30.0)
+
 ## Features
 * Chest and form UI with custom page support
 * API for another plugins
 * Lots of flags
 * Flexible settings
 * High performance
-## Maven dependency
-<details>
-<summary>Maven dependency</summary>
-
-```
-<repositories>
-    <repository>
-        <id>SRegionProtector-master</id>
-        <url>https://raw.github.com/SergeyDertan/SRegionProtector/mvn-repo/</url>
-        <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>always</updatePolicy>
-        </snapshots>
-    </repository>
-</repositories>
-<dependencies>
-    <dependency>
-        <groupId>sergeydertan.sregionprotector</groupId>
-        <artifactId>SRegionProtector</artifactId>
-        <version>LATEST</version>
-    </dependency>
-</dependencies>
-```
 
 </details>
 
 ## Commands and permissions can be found at [Wiki](https://github.com/SergeyDertan/SRegionProtector/wiki).
 
 ## !Warning! some flags may not work because they are disabled, pls check config.yml first
+
+## This is a port of the nukkit plugin to PNX. The code does not uses own implementations of PNX APIs so dont use this as a reference when learning PNX!
