@@ -1,7 +1,7 @@
 package Sergey_Dertan.SRegionProtector.Utils;
 
 import cn.nukkit.Player;
-import cn.nukkit.network.SourceInterface;
+import cn.nukkit.network.connection.BedrockSession;
 import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.utils.Config;
 import com.google.gson.Gson;
@@ -268,16 +268,7 @@ public abstract class Utils {
     }
 
     public static boolean directDataPacket(Player target, DataPacket pk) {
-        try {
-            Field interfaz = Player.class.getDeclaredField("interfaz");
-
-            boolean accessible = interfaz.isAccessible();
-            if (!accessible) interfaz.setAccessible(true);
-            ((SourceInterface) interfaz.get(target)).putPacket(target, pk);
-            interfaz.setAccessible(accessible);
-            return true;
-        } catch (NoSuchFieldException | IllegalAccessException ignore) {
-            return false;
-        }
+        target.dataPacket(pk);
+        return true;
     }
 }

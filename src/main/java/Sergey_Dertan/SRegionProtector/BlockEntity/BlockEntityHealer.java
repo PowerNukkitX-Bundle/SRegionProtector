@@ -7,7 +7,7 @@ import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import cn.nukkit.Player;
 import cn.nukkit.blockentity.BlockEntitySpawnable;
 import cn.nukkit.entity.Entity;
-import cn.nukkit.level.format.FullChunk;
+import cn.nukkit.level.format.IChunk;
 import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -27,7 +27,7 @@ public final class BlockEntityHealer extends BlockEntitySpawnable {
     private final String region;
     private int delay;
 
-    public BlockEntityHealer(FullChunk chunk, CompoundTag nbt) {
+    public BlockEntityHealer(IChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
         this.region = nbt.getString(REGION_TAG);
         this.regionManager = SRegionProtectorMain.getInstance().getRegionManager();

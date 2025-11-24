@@ -21,13 +21,13 @@ update-notifier: true
 region-creation-price: false
 price-per-block: 1
 
-wand-item: "271:0"
+wand-item: "minecraft:wooden_axe"
 
 # multithreaded regions loading
 multithreaded-loading: true
 multithreaded-loading-threads: -1
 # "20", "20:2"
-border-block: "20"
+border-block: "minecraft:glass"
 # 1 second = 20 ticks
 select-session-clear-interval: 20
 session-life-time: 120

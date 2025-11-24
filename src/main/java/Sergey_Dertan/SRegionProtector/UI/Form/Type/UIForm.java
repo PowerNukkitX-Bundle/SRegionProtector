@@ -2,7 +2,7 @@ package Sergey_Dertan.SRegionProtector.UI.Form.Type;
 
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import cn.nukkit.Player;
-import cn.nukkit.form.response.FormResponse;
+import cn.nukkit.form.response.Response;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public interface UIForm {
 
     Region getRegion();
 
-    default UIForm handle(FormResponse response, Player player) {
+    default UIForm handle(Response response, Player player) {
         return this;
     }
 }

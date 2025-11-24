@@ -7,10 +7,10 @@ import Sergey_Dertan.SRegionProtector.UI.Chest.Page.RemoveRegionPage;
 import Sergey_Dertan.SRegionProtector.Utils.Tags;
 import Sergey_Dertan.SRegionProtector.Utils.Utils;
 import cn.nukkit.Player;
+import cn.nukkit.block.BlockChest;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.item.Item;
-import cn.nukkit.level.GlobalBlockPalette;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -113,7 +113,7 @@ public abstract class ChestUIManager {
         pk1.z = (int) target.z;
         pk1.dataLayer = 0;
         pk1.flags = UpdateBlockPacket.FLAG_NONE;
-        pk1.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(BlockID.CHEST, 0);
+        pk1.blockRuntimeId = BlockChest.PROPERTIES.getDefaultState().blockStateHash();
         if (async && !Utils.directDataPacket(target, pk1)) {
             return null;
         } else {
@@ -127,10 +127,7 @@ public abstract class ChestUIManager {
         CompoundTag nbt = new CompoundTag();
         nbt.putString(Tags.CUSTOM_NAME_TAG, region);
 
-        try {
-            pk2.namedTag = NBTIO.write(nbt, ByteOrder.LITTLE_ENDIAN, true);
-        } catch (IOException ignore) {
-        }
+        pk2.namedTag = nbt;
         if (async && !Utils.directDataPacket(target, pk2)) {
             return null;
         } else {

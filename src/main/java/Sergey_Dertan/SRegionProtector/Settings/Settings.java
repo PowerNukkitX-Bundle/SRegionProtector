@@ -108,36 +108,14 @@ public final class Settings {
         this.pricePerBlock = ((Number) config.get("price-per-block")).doubleValue();
 
         String border = (String) config.get("border-block");
-        int id;
-        int meta;
-        if (border.split(":").length == 2) {
-            id = Integer.parseInt(border.split(":")[0]);
-            meta = Integer.parseInt(border.split(":")[1]);
-        } else {
-            id = Integer.parseInt(border);
-            meta = 0;
-        }
-        this.borderBlock = Block.get(id, meta);
+
+        this.borderBlock = Block.get(border);
 
         this.provider = DataProvider.Type.fromString((String) config.get("provider"));
 
-        Object wand = config.get("wand-item");
-        if (wand instanceof String) {
-            if (((String) wand).split(":").length == 2) {
-                id = Integer.parseInt(((String) wand).split(":")[0]);
-                meta = Integer.parseInt(((String) wand).split(":")[1]);
-            } else {
-                id = Integer.parseInt(((String) wand));
-                meta = 0;
-            }
-        } else if (wand instanceof Number) {
-            meta = 0;
-            id = ((Number) wand).intValue();
-        } else {
-            throw new RuntimeException("Wrong wand item");
-        }
+        String wand = (String) config.get("wand-item");
 
-        this.wandItem = Item.get(id, meta);
+        this.wandItem = Item.get(wand);
 
         this.mySQLSettings = new MySQLSettings(new Config(DB_FOLDER + "mysql.yml", Config.YAML).getAll());
         this.postgreSQLSettings = new PostgreSQLSettings(new Config(DB_FOLDER + "postgresql.yml", Config.YAML).getAll());

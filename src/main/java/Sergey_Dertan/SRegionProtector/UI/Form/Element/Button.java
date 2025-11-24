@@ -1,8 +1,8 @@
 package Sergey_Dertan.SRegionProtector.UI.Form.Element;
 
 import Sergey_Dertan.SRegionProtector.UI.Form.Type.UIForm;
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
+import cn.nukkit.form.element.simple.ButtonImage;
+import cn.nukkit.form.element.simple.ElementButton;
 
 public final class Button extends ElementButton {
 
@@ -35,8 +35,8 @@ public final class Button extends ElementButton {
         return UIForm.getInstance(this.target, this.args);
     }
 
-    public Button setImage(ElementButtonImageData image) {
-        this.addImage(image);
+    public Button setImage(ButtonImage image) {
+        this.setImage(image);
         return this;
     }
 }

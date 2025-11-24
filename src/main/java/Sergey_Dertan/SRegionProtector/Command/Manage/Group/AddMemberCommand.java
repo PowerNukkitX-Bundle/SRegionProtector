@@ -22,8 +22,8 @@ public final class AddMemberCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("addmember", new CommandParameter[]
                 {
-                        new CommandParameter("region", CommandParamType.STRING, false),
-                        new CommandParameter("player", CommandParamType.TARGET, false)
+                        CommandParameter.newType("region", CommandParamType.STRING),
+                        CommandParameter.newType("player", CommandParamType.TARGET)
                 }
         );
         this.setCommandParameters(parameters);

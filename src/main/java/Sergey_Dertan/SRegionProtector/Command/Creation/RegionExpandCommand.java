@@ -26,8 +26,8 @@ public final class RegionExpandCommand extends SRegionProtectorCommand {
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rgexpand", new CommandParameter[]{
-                new CommandParameter("amount", CommandParamType.INT, false),
-                new CommandParameter("up/down/radius", false, new String[]{"up", "down", "radius"})
+                CommandParameter.newType("amount", CommandParamType.INT),
+                CommandParameter.newEnum("up/down/radius", false, new String[]{"up", "down", "radius"})
         });
         this.setCommandParameters(parameters);
     }

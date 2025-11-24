@@ -6,12 +6,12 @@ import Sergey_Dertan.SRegionProtector.Region.Flags.RegionFlags;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.UI.Form.Element.Button;
 import cn.nukkit.Player;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.form.element.simple.ButtonImage;
+import cn.nukkit.form.window.SimpleForm;
 
 import java.util.Arrays;
 
-final class FlagsForm extends FormWindowSimple implements UIForm {
+final class FlagsForm extends SimpleForm implements UIForm {
 
     private static final transient String[] ICONS = new String[RegionFlags.FLAG_AMOUNT];
     private static final transient boolean[] flagStatus = SRegionProtectorMain.getInstance().getSettings().regionSettings.flagsStatus;
@@ -42,7 +42,6 @@ final class FlagsForm extends FormWindowSimple implements UIForm {
         ICONS[RegionFlags.FLAG_POTION_LAUNCH] = "textures/items/potion_bottle_splash_healthBoost.png";
         ICONS[RegionFlags.FLAG_HEAL] = "textures/ui/regeneration_effect.png";
         ICONS[RegionFlags.FLAG_HEALTH_REGEN] = "textures/ui/regeneration_effect.png";
-        ICONS[RegionFlags.FLAG_NETHER_PORTAL] = "textures/ui/NetherPortal.png";
         ICONS[RegionFlags.FLAG_SEND_CHAT] = "textures/ui/chat_send.png";
         ICONS[RegionFlags.FLAG_RECEIVE_CHAT] = "textures/ui/betaIcon.png";
         ICONS[RegionFlags.FLAG_FRAME_ITEM_DROP] = "textures/items/item_frame.png";
@@ -76,11 +75,11 @@ final class FlagsForm extends FormWindowSimple implements UIForm {
                 };
             }
 
-            ElementButtonImageData image = new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, ICONS[i]);
-            this.addButton(new Button(str.substring(0, 1).toUpperCase() + str.substring(1), FlagsForm.class, region, player).setBeforeNext(beforeNext).setImage(image));
+            ButtonImage image = new ButtonImage(ButtonImage.Type.PATH, ICONS[i]);
+            this.addElement(new Button(str.substring(0, 1).toUpperCase() + str.substring(1), FlagsForm.class, region, player).setBeforeNext(beforeNext).setImage(image));
             ++i;
         }
-        this.addButton(new Button("Back", MainForm.class, region, player));
+        this.addElement(new Button("Back", MainForm.class, region, player));
     }
 
     @Override

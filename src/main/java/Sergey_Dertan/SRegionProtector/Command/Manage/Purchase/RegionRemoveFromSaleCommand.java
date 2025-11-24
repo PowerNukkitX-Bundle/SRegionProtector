@@ -21,7 +21,7 @@ public final class RegionRemoveFromSaleCommand extends SRegionProtectorCommand {
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rgremovefromsell", new CommandParameter[]{
-                new CommandParameter("region", CommandParamType.STRING, false)
+                CommandParameter.newType("region", false, CommandParamType.STRING)
         });
         this.setCommandParameters(parameters);
     }

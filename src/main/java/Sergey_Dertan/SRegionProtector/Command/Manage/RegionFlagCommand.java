@@ -25,9 +25,9 @@ public final class RegionFlagCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("flagdata", new CommandParameter[]
                 {
-                        new CommandParameter("region", CommandParamType.STRING, false),
-                        new CommandParameter("flag", CommandParamType.STRING, false),
-                        new CommandParameter("state", false, new String[]{"allow", "deny"})
+                        CommandParameter.newType("region", CommandParamType.STRING),
+                        CommandParameter.newType("flag", CommandParamType.STRING),
+                        CommandParameter.newEnum("state", false, new String[]{"allow", "deny"})
                 }
         );
         this.setCommandParameters(parameters);

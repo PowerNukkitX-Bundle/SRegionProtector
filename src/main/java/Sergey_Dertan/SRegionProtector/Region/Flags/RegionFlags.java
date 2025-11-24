@@ -26,7 +26,6 @@ public abstract class RegionFlags {
      */
     public static final int FLAG_INVALID = -1;
     public static final int FLAG_PLACE = 0;
-    public static final int FLAG_BREAK = 29;
     public static final int FLAG_INTERACT = 1;
     public static final int FLAG_USE = 2;
     public static final int FLAG_PVP = 3;
@@ -55,20 +54,20 @@ public abstract class RegionFlags {
     public static final int FLAG_LIQUID_FLOW = 26; //lava & water spread
     public static final int FLAG_CHEST_ACCESS = 27;
     public static final int FLAG_SLEEP = 28;
+    public static final int FLAG_BREAK = 29;
     public static final int FLAG_CHUNK_LOADER = 30;
     public static final int FLAG_SMART_DOORS = 31;
     public static final int FLAG_MINEFARM = 32;
     public static final int FLAG_FALL_DAMAGE = 33;
-    public static final int FLAG_NETHER_PORTAL = 34;
-    public static final int FLAG_FRAME_ITEM_DROP = 35;
-    public static final int FLAG_BUCKET_EMPTY = 36;
-    public static final int FLAG_BUCKET_FILL = 37;
-    public static final int FLAG_BLOCK_FALL = 38;
-    public static final int FLAG_MINECART_DESTROY = 39;
-    public static final int FLAG_HOPPER = 40;
-    public static final int FLAG_ENTRY = 41;
+    public static final int FLAG_FRAME_ITEM_DROP = 34;
+    public static final int FLAG_BUCKET_EMPTY = 35;
+    public static final int FLAG_BUCKET_FILL = 36;
+    public static final int FLAG_BLOCK_FALL = 37;
+    public static final int FLAG_MINECART_DESTROY = 38;
+    public static final int FLAG_HOPPER = 39;
+    public static final int FLAG_ENTRY = 40;
 
-    public static final int FLAG_AMOUNT = 42;
+    public static final int FLAG_AMOUNT = 41;
 
     public static final RegionFlag[] defaults = new RegionFlag[FLAG_AMOUNT];
     public static final Permission[] permissions = new Permission[FLAG_AMOUNT];

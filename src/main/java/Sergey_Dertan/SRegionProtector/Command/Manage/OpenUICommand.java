@@ -8,6 +8,7 @@ import Sergey_Dertan.SRegionProtector.UI.Chest.ChestUIManager;
 import Sergey_Dertan.SRegionProtector.UI.Form.FormUIManager;
 import Sergey_Dertan.SRegionProtector.UI.UIType;
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
@@ -32,7 +33,7 @@ public final class OpenUICommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("guitarget", new CommandParameter[]
                 {
-                        new CommandParameter("region", CommandParamType.STRING, true)
+                        CommandParameter.newType("region", true, CommandParamType.STRING)
                 }
         );
         this.setCommandParameters(parameters);
@@ -67,14 +68,16 @@ public final class OpenUICommand extends SRegionProtectorCommand {
     }
 
     private void openUI(Player player, Region region) {
-        if (!region.isLivesIn(player.getName()) && !player.hasPermission("sregionprotector.info.other") && !player.hasPermission("sregionprotector.admin")) {
-            this.messenger.sendMessage(player, "command.gui.permission");
-            return;
-        }
-        if (this.uiType == UIType.CHEST) {
-            ChestUIManager.open(player, region);
-        } else {
-            FormUIManager.open(player, region);
-        }
+        Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
+            if (!region.isLivesIn(player.getName()) && !player.hasPermission("sregionprotector.info.other") && !player.hasPermission("sregionprotector.admin")) {
+                this.messenger.sendMessage(player, "command.gui.permission");
+                return;
+            }
+            if (this.uiType == UIType.CHEST) {
+                ChestUIManager.open(player, region);
+            } else {
+                FormUIManager.open(player, region);
+            }
+        }, 10);
     }
 }

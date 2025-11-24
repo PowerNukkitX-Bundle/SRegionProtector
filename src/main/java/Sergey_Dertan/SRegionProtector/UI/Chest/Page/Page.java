@@ -46,7 +46,7 @@ public interface Page {
 
         nbt = new CompoundTag();
         nbt.putString(Tags.OPEN_PAGE_TAG, MAIN.getName());
-        this.put(26, Item.get(ItemID.SLIMEBALL).setNamedTag(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.back")));
+        this.put(26, Item.get(ItemID.SLIME_BALL).setNamedTag(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.back")));
     }};
 
     static Page getPage(String name) {

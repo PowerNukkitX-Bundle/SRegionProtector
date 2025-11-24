@@ -12,13 +12,15 @@ import cn.nukkit.block.*;
 import cn.nukkit.blockentity.BlockEntityHopper;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.EntitySwimmable;
+import cn.nukkit.entity.item.EntityHopperMinecart;
+import cn.nukkit.entity.item.EntityLingeringPotion;
 import cn.nukkit.entity.item.EntityMinecartAbstract;
-import cn.nukkit.entity.item.EntityMinecartHopper;
-import cn.nukkit.entity.item.EntityPotion;
+import cn.nukkit.entity.item.EntitySplashPotion;
 import cn.nukkit.entity.mob.EntityMob;
 import cn.nukkit.entity.passive.EntityAnimal;
-import cn.nukkit.entity.passive.EntityWaterAnimal;
-import cn.nukkit.entity.weather.EntityLightning;
+import cn.nukkit.entity.weather.EntityLightningBolt;
+import cn.nukkit.entity.weather.EntityLightningStrike;
 import cn.nukkit.event.Event;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
@@ -30,18 +32,19 @@ import cn.nukkit.event.level.ChunkUnloadEvent;
 import cn.nukkit.event.level.LevelLoadEvent;
 import cn.nukkit.event.player.*;
 import cn.nukkit.event.redstone.RedstoneUpdateEvent;
+import cn.nukkit.event.vehicle.VehicleDamageByEntityEvent;
 import cn.nukkit.event.vehicle.VehicleDamageEvent;
 import cn.nukkit.event.weather.LightningStrikeEvent;
 import cn.nukkit.item.ItemID;
-import cn.nukkit.level.EnumLevel;
 import cn.nukkit.level.Position;
 import cn.nukkit.level.Sound;
-import cn.nukkit.level.format.FullChunk;
+import cn.nukkit.level.format.IChunk;
 import cn.nukkit.level.particle.AngryVillagerParticle;
 import cn.nukkit.level.particle.Particle;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.network.protocol.DataPacket;
+import cn.nukkit.network.protocol.ItemFrameDropItemPacket;
 import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 
@@ -60,8 +63,6 @@ public final class RegionEventsHandler implements Listener {
 
     private final Object2BooleanMap<Class> isMonster;
     private final Class monster; //mobplugin
-
-    private final Pair<Vector3, Integer>[] portalBlocks;
 
     private final Messenger.MessageType protectedMessageType;
 
@@ -83,61 +84,8 @@ public final class RegionEventsHandler implements Listener {
         } catch (ClassNotFoundException ignore) {
         }
         this.monster = monster;
-
-        this.portalBlocks = this.netherPortalBlocks();
     }
 
-    /**
-     * @see BlockNetherPortal#spawnPortal(Position)
-     */
-    private Pair[] netherPortalBlocks() {
-        Map<Vector3, Integer> blocks = new HashMap<>();
-
-        blocks.put(new Vector3(1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(2), BlockID.OBSIDIAN);
-
-        //z=1
-        blocks.put(new Vector3(0, 0, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(1, 0, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(2, 0, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(3, 0, 1), BlockID.OBSIDIAN);
-        //z=2
-        blocks.put(new Vector3(1, 0, 2), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(2, 0, 2), BlockID.OBSIDIAN);
-        //z=1
-        //y=1
-        blocks.put(new Vector3(0, 1, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(1, 1, 1), BlockID.NETHER_PORTAL);
-        blocks.put(new Vector3(2, 1, 1), BlockID.NETHER_PORTAL);
-        blocks.put(new Vector3(3, 1, 1), BlockID.OBSIDIAN);
-        //y=2
-        //z=1
-        blocks.put(new Vector3(0, 2, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(1, 2, 1), BlockID.NETHER_PORTAL);
-        blocks.put(new Vector3(2, 2, 1), BlockID.NETHER_PORTAL);
-        blocks.put(new Vector3(3, 2, 1), BlockID.OBSIDIAN);
-        //y=3
-        blocks.put(new Vector3(0, 3, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(1, 3, 1), BlockID.NETHER_PORTAL);
-        blocks.put(new Vector3(2, 3, 1), BlockID.NETHER_PORTAL);
-        blocks.put(new Vector3(3, 3, 1), BlockID.OBSIDIAN);
-        //y=4
-        blocks.put(new Vector3(0, 4, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(1, 4, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(2, 4, 1), BlockID.OBSIDIAN);
-        blocks.put(new Vector3(3, 4, 1), BlockID.OBSIDIAN);
-
-        for (int x = -1; x < 4; x++) {
-            for (int y = 1; y < 4; y++) {
-                for (int z = -1; z < 3; z++) {
-                    blocks.putIfAbsent(new Vector3(x, y, z), BlockID.AIR);
-                }
-            }
-        }
-        List<Pair<Vector3, Integer>> blockss = new ArrayList<>();
-        blocks.forEach((k, v) -> blockss.add(new Pair<>(k, v)));
-        return blockss.toArray(new Pair[0]);
-    }
 
     //break & minefarm flags
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
@@ -188,64 +136,8 @@ public final class RegionEventsHandler implements Listener {
         Block block = e.getBlock();
         this.handleEvent(RegionFlags.FLAG_INTERACT, block, e.getPlayer(), e);
         if (e.isCancelled()) return;
-        if (block instanceof BlockDoor || block instanceof BlockTrapdoorIron) {
-            if (this.canInteractWith(RegionFlags.FLAG_SMART_DOORS, block, e.getPlayer())) {
-                if (block instanceof BlockTrapdoorIron) {
-                    block.setDamage(block.getDamage() ^ 0x08);
-                    block.level.setBlock(block, block, true);
-                    block.level.addSound(block, ((BlockTrapdoorIron) block).isOpen() ? Sound.RANDOM_DOOR_OPEN : Sound.RANDOM_DOOR_CLOSE);
-                    return;
-                }
-                BlockDoor door = (BlockDoor) block;
-
-                int damage = door.getDamage();
-                boolean isUp = (damage & 8) > 0;
-                int up;
-                if (isUp) {
-                    up = damage;
-                } else {
-                    up = door.up().getDamage();
-                }
-                boolean isRight = (up & 1) > 0;
-
-                BlockFace second;
-                if (isUp) {
-                    second = ((BlockDoor) door.down()).getBlockFace();
-                } else {
-                    second = door.getBlockFace();
-                }
-
-                if (isRight) {
-                    switch (second) {
-                        case EAST:
-                            second = BlockFace.WEST;
-                            break;
-                        case WEST:
-                            second = BlockFace.EAST;
-                            break;
-                        case NORTH:
-                            second = BlockFace.SOUTH;
-                            break;
-                        case SOUTH:
-                            second = BlockFace.NORTH;
-                            break;
-                    }
-                }
-
-                BlockDoor pair = door.getSide(second) instanceof BlockDoor ? ((BlockDoor) door.getSide(second)) : null;
-
-                if (door.toggle(e.getPlayer())) {
-                    door.level.addSound(door, door.isOpen() ? Sound.RANDOM_DOOR_OPEN : Sound.RANDOM_DOOR_CLOSE);
-                }
-
-                if (pair != null && !pair.isTop(pair.getDamage())) {
-                    pair = ((BlockDoor) pair.up());
-                }
-                if (pair != null && ((pair.getDamage() & 1) > 0 == !isRight)) {
-                    if (pair.toggle(e.getPlayer())) {
-                        pair.level.addSound(pair, pair.isOpen() ? Sound.RANDOM_DOOR_OPEN : Sound.RANDOM_DOOR_CLOSE);
-                    }
-                }
+        if (block instanceof BlockDoor || block instanceof BlockTrapdoor) {
+            if (!this.canInteractWith(RegionFlags.FLAG_SMART_DOORS, block, e.getPlayer())) {
                 e.setCancelled();
                 return;
             }
@@ -290,7 +182,7 @@ public final class RegionEventsHandler implements Listener {
                         (this.monster != null && this.isMonster.computeIfAbsent(((EntityDamageByEntityEvent) e).getDamager().getClass(), (s) -> this.monster.isAssignableFrom(((EntityDamageByEntityEvent) e).getDamager().getClass())))
         ) {
             this.handleEvent(RegionFlags.FLAG_MOB_DAMAGE, e.getEntity(), (Player) e.getEntity(), e, false, false);
-        } else if (((EntityDamageByEntityEvent) e).getDamager() instanceof EntityLightning) {
+        } else if (((EntityDamageByEntityEvent) e).getDamager() instanceof EntityLightningStrike) {
             this.handleEvent(RegionFlags.FLAG_LIGHTNING_STRIKE, e.getEntity(), e);
         }
     }
@@ -300,14 +192,14 @@ public final class RegionEventsHandler implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void entitySpawn(EntitySpawnEvent e) {
         EmptyEvent ev = new EmptyEvent();
-        if (e.getEntity() instanceof EntityLightning) {
+        if (e.getEntity() instanceof EntityLightningStrike) {
             this.handleEvent(RegionFlags.FLAG_LIGHTNING_STRIKE, e.getPosition(), ev);
             if (ev.isCancelled()) e.getEntity().close();
             return;
         }
         if (e.getEntity() instanceof EntityMob ||
                 e.getEntity() instanceof EntityAnimal ||
-                e.getEntity() instanceof EntityWaterAnimal ||
+                e.getEntity() instanceof EntitySwimmable ||
                 (this.monster != null && this.isMonster.computeIfAbsent(e.getEntity().getClass(), (s) -> this.monster.isAssignableFrom(e.getEntity().getClass())))
         ) {
             this.handleEvent(RegionFlags.FLAG_MOB_SPAWN, e.getPosition(), ev);
@@ -318,7 +210,7 @@ public final class RegionEventsHandler implements Listener {
     //lightning strike flag
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void lightningStrike(LightningStrikeEvent e) {
-        if (e.getLightning() instanceof EntityLightning)
+        if (e.getLightning() instanceof EntityLightningStrike)
             this.handleEvent(RegionFlags.FLAG_LIGHTNING_STRIKE, ((Position) e.getLightning()), e);
     }
 
@@ -362,7 +254,7 @@ public final class RegionEventsHandler implements Listener {
     //potion launch flag
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void projectileLaunch(ProjectileLaunchEvent e) {
-        if (!(e.getEntity() instanceof EntityPotion)) return;
+        if (!((e.getEntity() instanceof EntitySplashPotion) || (e.getEntity() instanceof EntityLingeringPotion))) return;
         Player source = null;
         if (e.getEntity().shootingEntity instanceof Player) source = (Player) e.getEntity().shootingEntity;
         this.handleEvent(RegionFlags.FLAG_POTION_LAUNCH, e.getEntity(), source, e, false, false);
@@ -464,48 +356,8 @@ public final class RegionEventsHandler implements Listener {
 
     //frame item drop flag
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void itemFrameDropItem(ItemFrameDropItemEvent e) {
+    public void itemFrameDropItem(ItemFrameUseEvent e) {
         this.handleEvent(RegionFlags.FLAG_FRAME_ITEM_DROP, e.getBlock(), e.getPlayer(), e);
-    }
-
-    //prevent nether portal from spawning in region
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void entityPortalEnter(EntityPortalEnterEvent e) {
-        if (!this.flagsStatus[RegionFlags.FLAG_NETHER_PORTAL]) return;
-        if (e.getPortalType() != EntityPortalEnterEvent.PortalType.NETHER) return;
-        Position portal;
-        try {
-            portal = EnumLevel.moveToNether(e.getEntity()).floor();
-        } catch (IllegalArgumentException ex) {
-            return;
-        }
-
-        if (portal == null) return;
-
-        for (int x = -1; x < 2; x++) {
-            for (int z = -1; z < 2; z++) {
-                int chunkX = (portal.getFloorX() >> 4) + x;
-                int chunkZ = (portal.getFloorZ() >> 4) + z;
-                FullChunk chunk = portal.level.getChunk(chunkX, chunkZ, true);
-                if (chunk == null || !(chunk.isGenerated() || chunk.isPopulated())) {
-                    portal.level.generateChunk(chunkX, chunkZ, true);
-                }
-            }
-        }
-
-        for (Pair<Vector3, Integer> block : this.portalBlocks) {
-            Vector3 pos = portal.add(block.key).floor();
-            if (portal.level.getBlockIdAt((int) pos.x, (int) pos.y, (int) pos.z) != block.value) {
-                Region region = this.chunkManager.getRegion(pos, portal.level.getName());
-                if (region != null && region.getFlagState(RegionFlags.FLAG_NETHER_PORTAL)) {
-                    e.setCancelled();
-                    if (e.getEntity() instanceof Player) {
-                        Messenger.getInstance().sendMessage(((Player) e.getEntity()), "region.protected." + RegionFlags.getFlagName(RegionFlags.FLAG_NETHER_PORTAL));
-                    }
-                    break;
-                }
-            }
-        }
     }
 
     //bucket empty flag
@@ -522,7 +374,7 @@ public final class RegionEventsHandler implements Listener {
 
     //minecart destroy
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void vehicleDamage(VehicleDamageEvent e) {
+    public void vehicleDamage(VehicleDamageByEntityEvent e) {
         if (!(e.getVehicle() instanceof EntityMinecartAbstract)) return;
         this.handleEvent(RegionFlags.FLAG_MINECART_DESTROY, e.getVehicle(), e.getAttacker() instanceof Player ? (Player) e.getAttacker() : null, e, true, true);
     }
@@ -530,7 +382,7 @@ public final class RegionEventsHandler implements Listener {
     //hopper flag
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void inventoryMoveItem(InventoryMoveItemEvent e) {
-        if (!(e.getSource() instanceof BlockEntityHopper) && !(e.getSource() instanceof EntityMinecartHopper)) return;
+        if (!(e.getSource() instanceof BlockEntityHopper) && !(e.getSource() instanceof EntityHopperMinecart)) return;
         this.handleEvent(RegionFlags.FLAG_HOPPER, ((Position) e.getSource()), e);
     }
 

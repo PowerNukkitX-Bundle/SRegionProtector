@@ -6,6 +6,7 @@ import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import Sergey_Dertan.SRegionProtector.Utils.Tags;
 import cn.nukkit.Player;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemID;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -26,7 +27,7 @@ public final class OwnersPage implements Page {
         Map<Integer, Item> list = new HashMap<>(NAVIGATORS_CACHE);
         int counter = 0;
         for (String owner : region.getOwners().stream().skip(page * 18).limit(18).collect(Collectors.toList())) {
-            Item item = Item.get(ItemID.SKULL, 3).
+            Item item = Item.get(ItemID.PLAYER_HEAD).
                     setCustomName(Messenger.getInstance().getMessage("gui.owners.owner-name", "@owner", owner)).
                     setLore(Messenger.getInstance().getMessage("gui.owners.owner-lore"));
             @SuppressWarnings("Duplicates")
@@ -61,7 +62,7 @@ public final class OwnersPage implements Page {
 
     @Override
     public Item getIcon() {
-        Item item = Item.get(ItemID.SKULL, 3).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-owners"));
+        Item item = Item.get(ItemID.PLAYER_HEAD).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-owners"));
         CompoundTag nbt = item.getNamedTag();
         nbt.putString(Tags.OPEN_PAGE_TAG, this.getName());
         item.setNamedTag(nbt);

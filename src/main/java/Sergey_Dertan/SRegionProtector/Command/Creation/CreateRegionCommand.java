@@ -33,7 +33,7 @@ public final class CreateRegionCommand extends SRegionProtectorCommand {
         this.pricePerBlock = pricePerBlock;
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
-        parameters.put("rgname", new CommandParameter[]{new CommandParameter("region", CommandParamType.STRING, false)});
+        parameters.put("rgname", new CommandParameter[]{CommandParameter.newType("region", CommandParamType.STRING)});
         this.setCommandParameters(parameters);
     }
 

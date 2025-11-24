@@ -22,8 +22,8 @@ public class CopyFlagsCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("copyflags", new CommandParameter[]
                 {
-                        new CommandParameter("source", CommandParamType.STRING, false),
-                        new CommandParameter("target", CommandParamType.STRING, false)
+                        CommandParameter.newType("source", CommandParamType.STRING),
+                        CommandParameter.newType("target", CommandParamType.STRING)
                 }
         );
         this.setCommandParameters(parameters);

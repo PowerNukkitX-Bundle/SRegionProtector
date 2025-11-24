@@ -22,7 +22,7 @@ public final class Pos1Command extends SRegionProtectorCommand {
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("target_pos1", new CommandParameter[]{
-                new CommandParameter("target", CommandParamType.POSITION, true)
+                CommandParameter.newType("target", true, CommandParamType.POSITION)
         });
         this.setCommandParameters(parameters);
     }

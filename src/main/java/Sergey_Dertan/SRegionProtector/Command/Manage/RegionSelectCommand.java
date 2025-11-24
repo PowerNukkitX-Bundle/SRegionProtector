@@ -26,7 +26,7 @@ public final class RegionSelectCommand extends SRegionProtectorCommand {
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rgselect", new CommandParameter[]{
-                new CommandParameter("region", CommandParamType.STRING, false)
+                CommandParameter.newType("region", CommandParamType.STRING)
         });
         this.setCommandParameters(parameters);
     }

@@ -32,7 +32,7 @@ public final class RegionInfoCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rginfo", new CommandParameter[]
                 {
-                        new CommandParameter("region", CommandParamType.STRING, true)
+                        CommandParameter.newType("region", true, CommandParamType.STRING)
                 }
         );
         this.setCommandParameters(parameters);

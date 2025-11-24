@@ -23,8 +23,8 @@ public final class SetPriorityCommand extends SRegionProtectorCommand {
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rgsetpriority", new CommandParameter[]{
-                new CommandParameter("region", CommandParamType.STRING, false),
-                new CommandParameter("priority", CommandParamType.INT, false)
+                CommandParameter.newType("region", CommandParamType.STRING),
+                CommandParameter.newType("priority", CommandParamType.INT)
         });
         this.setCommandParameters(parameters);
     }

@@ -3,9 +3,9 @@ package Sergey_Dertan.SRegionProtector.UI.Form.Type;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.UI.Form.Element.Button;
 import cn.nukkit.Player;
-import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.form.window.SimpleForm;
 
-final class MembersForm extends FormWindowSimple implements UIForm {
+final class MembersForm extends SimpleForm implements UIForm {
 
     private final transient Region region;
 
@@ -14,11 +14,11 @@ final class MembersForm extends FormWindowSimple implements UIForm {
         this.region = region;
 
         if (player.hasPermission("sregionprotector.admin") || this.region.isOwner(player.getName(), true)) {
-            region.getMembers().forEach(member -> this.addButton(new Button(member, MemberRemoveForm.class, member, region)));
+            region.getMembers().forEach(member -> this.addElement(new Button(member, MemberRemoveForm.class, member, region)));
         } else {
-            region.getMembers().forEach(member -> this.addButton(new Button(member, MembersForm.class, region, player)));
+            region.getMembers().forEach(member -> this.addElement(new Button(member, MembersForm.class, region, player)));
         }
-        this.addButton(new Button("Back", MainForm.class, region, player));
+        this.addElement(new Button("Back", MainForm.class, region, player));
     }
 
     @Override

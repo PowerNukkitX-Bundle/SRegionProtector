@@ -21,8 +21,8 @@ public final class RegionSellCommand extends SRegionProtectorCommand {
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rgsell", new CommandParameter[]{
-                new CommandParameter("region", CommandParamType.STRING, false),
-                new CommandParameter("price", CommandParamType.INT, false)
+                CommandParameter.newType("region", false, CommandParamType.STRING),
+                CommandParameter.newType("price", false, CommandParamType.INT)
         });
         this.setCommandParameters(parameters);
     }

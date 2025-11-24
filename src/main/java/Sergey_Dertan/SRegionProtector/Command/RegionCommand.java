@@ -55,7 +55,7 @@ public final class RegionCommand extends SRegionProtectorCommand {
 
         customData.aliases = new CommandEnum("RegionAliases", aliases);
 
-        customData.description = player.getServer().getLanguage().translateString(this.getDescription());
+        customData.description = player.getServer().getLanguage().tr(this.getDescription());
         this.commandParameters.forEach((key, par) -> {
             if (this.commands.get(key).testPermissionSilent(player)) {
                 CommandOverload overload = new CommandOverload();
@@ -100,7 +100,7 @@ public final class RegionCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> params = new Object2ObjectArrayMap<>();
         this.commands.forEach((k, v) -> {
             List<CommandParameter> p = new ArrayList<>();
-            p.add(new CommandParameter(k, false, new String[]{k}));
+            p.add(CommandParameter.newEnum(k, false, new String[]{k}));
             v.getCommandParameters().values().forEach(s -> p.addAll(Arrays.asList(s)));
             params.put(k, p.toArray(new CommandParameter[0]));
         });

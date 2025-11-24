@@ -22,7 +22,7 @@ public final class RegionRemoveCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("rgremove-rg", new CommandParameter[]
                 {
-                        new CommandParameter("region", CommandParamType.STRING, false)
+                        CommandParameter.newType("region", CommandParamType.STRING)
                 }
         );
         this.setCommandParameters(parameters);

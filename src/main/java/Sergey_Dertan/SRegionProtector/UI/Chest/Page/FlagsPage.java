@@ -25,42 +25,41 @@ import java.util.stream.Collectors;
 
 public final class FlagsPage implements Page {
 
-    private final int[] flagToBlock;
+    private final String[] flagToBlock;
 
     FlagsPage() {
-        this.flagToBlock = new int[RegionFlags.FLAG_AMOUNT];
+        this.flagToBlock = new String[RegionFlags.FLAG_AMOUNT];
         Arrays.fill(this.flagToBlock, ItemID.BANNER);
 
-        this.flagToBlock[RegionFlags.FLAG_PLACE] = BlockID.GRASS;
-        this.flagToBlock[RegionFlags.FLAG_BREAK] = BlockID.GRASS;
+        this.flagToBlock[RegionFlags.FLAG_PLACE] = BlockID.GRASS_BLOCK;
+        this.flagToBlock[RegionFlags.FLAG_BREAK] = BlockID.GRASS_BLOCK;
         this.flagToBlock[RegionFlags.FLAG_USE] = BlockID.LEVER;
         this.flagToBlock[RegionFlags.FLAG_PVP] = ItemID.DIAMOND_SWORD;
         this.flagToBlock[RegionFlags.FLAG_EXPLODE] = BlockID.TNT;
         this.flagToBlock[RegionFlags.FLAG_EXPLODE_BLOCK_BREAK] = BlockID.TNT;
         this.flagToBlock[RegionFlags.FLAG_LIGHTER] = ItemID.FLINT_AND_STEEL;
-        this.flagToBlock[RegionFlags.FLAG_LEAVES_DECAY] = BlockID.LEAVE;
+        this.flagToBlock[RegionFlags.FLAG_LEAVES_DECAY] = BlockID.OAK_LEAVES;
         this.flagToBlock[RegionFlags.FLAG_ITEM_DROP] = ItemID.STICK;
         this.flagToBlock[RegionFlags.FLAG_MOB_SPAWN] = ItemID.SPAWN_EGG;
         this.flagToBlock[RegionFlags.FLAG_CROPS_DESTROY] = BlockID.FARMLAND;
-        this.flagToBlock[RegionFlags.FLAG_REDSTONE] = ItemID.REDSTONE_DUST;
+        this.flagToBlock[RegionFlags.FLAG_REDSTONE] = ItemID.REDSTONE;
         this.flagToBlock[RegionFlags.FLAG_ENDER_PEARL] = ItemID.ENDER_PEARL;
-        this.flagToBlock[RegionFlags.FLAG_FIRE] = BlockID.FIRE;
-        this.flagToBlock[RegionFlags.FLAG_LIQUID_FLOW] = BlockID.STILL_WATER;
+        this.flagToBlock[RegionFlags.FLAG_FIRE] = ItemID.FLINT_AND_STEEL;
+        this.flagToBlock[RegionFlags.FLAG_LIQUID_FLOW] = ItemID.WATER_BUCKET;
         this.flagToBlock[RegionFlags.FLAG_CHEST_ACCESS] = BlockID.CHEST;
-        this.flagToBlock[RegionFlags.FLAG_SLEEP] = ItemID.BED;
-        this.flagToBlock[RegionFlags.FLAG_SMART_DOORS] = ItemID.IRON_DOOR;
+        this.flagToBlock[RegionFlags.FLAG_SLEEP] = BlockID.BED;
+        this.flagToBlock[RegionFlags.FLAG_SMART_DOORS] = BlockID.IRON_DOOR;
         this.flagToBlock[RegionFlags.FLAG_MINEFARM] = BlockID.DIAMOND_ORE;
         this.flagToBlock[RegionFlags.FLAG_POTION_LAUNCH] = ItemID.SPLASH_POTION;
         this.flagToBlock[RegionFlags.FLAG_HEAL] = ItemID.GOLDEN_APPLE;
-        this.flagToBlock[RegionFlags.FLAG_NETHER_PORTAL] = BlockID.NETHER_PORTAL;
         this.flagToBlock[RegionFlags.FLAG_SELL] = ItemID.EMERALD;
-        this.flagToBlock[RegionFlags.FLAG_FRAME_ITEM_DROP] = ItemID.ITEM_FRAME;
+        this.flagToBlock[RegionFlags.FLAG_FRAME_ITEM_DROP] = BlockID.FRAME;
         this.flagToBlock[RegionFlags.FLAG_BUCKET_EMPTY] = ItemID.BUCKET;
         this.flagToBlock[RegionFlags.FLAG_BUCKET_FILL] = ItemID.BUCKET;
         this.flagToBlock[RegionFlags.FLAG_TELEPORT] = ItemID.ENDER_PEARL;
         this.flagToBlock[RegionFlags.FLAG_BLOCK_FALL] = BlockID.SAND;
         this.flagToBlock[RegionFlags.FLAG_MINECART_DESTROY] = ItemID.MINECART;
-        this.flagToBlock[RegionFlags.FLAG_HOPPER] = ItemID.HOPPER;
+        this.flagToBlock[RegionFlags.FLAG_HOPPER] = BlockID.HOPPER;
 
     }
 

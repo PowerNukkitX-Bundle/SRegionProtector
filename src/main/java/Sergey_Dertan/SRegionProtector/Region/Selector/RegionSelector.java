@@ -2,10 +2,9 @@ package Sergey_Dertan.SRegionProtector.Region.Selector;
 
 import cn.nukkit.Player;
 import cn.nukkit.block.Block;
-import cn.nukkit.level.GlobalBlockPalette;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.network.SourceInterface;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
+import cn.nukkit.registry.Registries;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
@@ -21,8 +20,6 @@ public final class RegionSelector {
     private final Int2ObjectMap<SelectorSession> sessions;
     private final int borderBlock;
     private final Int2ObjectMap<Set<Vector3>> borders;
-    private final Field interfaz;
-    private final boolean async;
 
     @SuppressWarnings("unchecked")
     public RegionSelector(long sessionLifetime, Block borderBlock, boolean async) {
@@ -30,18 +27,7 @@ public final class RegionSelector {
         this.borders = new Int2ObjectArrayMap<>();
         this.borders.defaultReturnValue(Collections.EMPTY_SET);
         this.sessionLifetime = sessionLifetime;
-        this.borderBlock = GlobalBlockPalette.getOrCreateRuntimeId(borderBlock.getId(), borderBlock.getDamage());
-        this.async = async;
-
-        Field interfaz = null;
-        if (async) {
-            try {
-                interfaz = Player.class.getDeclaredField("interfaz");
-                interfaz.setAccessible(true);
-            } catch (NoSuchFieldException | SecurityException ignore) {
-            }
-        }
-        this.interfaz = interfaz;
+        this.borderBlock = Registries.BLOCK.get(borderBlock.getId()).getBlockState().blockStateHash();
     }
 
     public void removeSession(Player player) {
@@ -80,14 +66,6 @@ public final class RegionSelector {
         int maxZ = (int) Math.max(pos1.z, pos2.z);
 
         Set<Vector3> blocks = new ObjectArraySet<>(10);
-        SourceInterface interfaz = null;
-        if (this.async) {
-            try {
-                interfaz = (SourceInterface) this.interfaz.get(target);
-            } catch (IllegalAccessException e) {
-                return;
-            }
-        }
 
         for (int yt = minY; yt <= maxY; ++yt) {
             for (int xt = minX; ; xt = maxX) {
@@ -98,11 +76,7 @@ public final class RegionSelector {
                     pk.z = zt;
                     pk.flags = UpdateBlockPacket.FLAG_ALL;
                     pk.blockRuntimeId = this.borderBlock;
-                    if (this.async) {
-                        interfaz.putPacket(target, pk);
-                    } else {
-                        target.dataPacket(pk);
-                    }
+                    target.dataPacket(pk);
                     blocks.add(new Vector3(xt, yt, zt));
                     if (zt == maxZ) break;
                 }
@@ -119,11 +93,7 @@ public final class RegionSelector {
                     pk.z = zd;
                     pk.flags = UpdateBlockPacket.FLAG_ALL;
                     pk.blockRuntimeId = this.borderBlock;
-                    if (this.async) {
-                        interfaz.putPacket(target, pk);
-                    } else {
-                        target.dataPacket(pk);
-                    }
+                    target.dataPacket(pk);
                     blocks.add(new Vector3(zx, yd, zd));
                 }
                 if (zd == maxZ) break;
@@ -137,11 +107,7 @@ public final class RegionSelector {
                     pk.z = zx;
                     pk.flags = UpdateBlockPacket.FLAG_ALL;
                     pk.blockRuntimeId = this.borderBlock;
-                    if (this.async) {
-                        interfaz.putPacket(target, pk);
-                    } else {
-                        target.dataPacket(pk);
-                    }
+                    target.dataPacket(pk);
                     blocks.add(new Vector3(xd, yd, zx));
                 }
                 if (xd == maxX) break;
@@ -163,34 +129,11 @@ public final class RegionSelector {
     @SuppressWarnings("ConstantConditions")
     public void removeBorders(Player target, boolean send) {
         if (send) {
-            if (this.async) {
-                SourceInterface interfaz = null;
-                try {
-                    interfaz = (SourceInterface) this.interfaz.get(target);
-                } catch (IllegalAccessException ignore) {
-                }
-                SourceInterface inter = interfaz;
-
-                Set<Vector3> blocks;
-                synchronized (this.lock) {
-                    blocks = this.borders.get(target.getLoaderId());
-                }
-                blocks.forEach(s -> {
-                    UpdateBlockPacket pk = new UpdateBlockPacket();
-                    pk.x = (int) s.x;
-                    pk.y = (int) s.y;
-                    pk.z = (int) s.z;
-                    pk.flags = UpdateBlockPacket.FLAG_ALL;
-                    pk.blockRuntimeId = GlobalBlockPalette.getOrCreateRuntimeId(target.level.getBlockIdAt((int) s.x, (int) s.y, (int) s.z), target.level.getBlockDataAt((int) s.x, (int) s.y, (int) s.z));
-                    inter.putPacket(target, pk);
-                });
-            } else {
-                Vector3[] blocks;
-                synchronized (this.lock) {
-                    blocks = this.borders.get(target.getLoaderId()).toArray(new Vector3[0]);
-                }
-                target.level.sendBlocks(new Player[]{target}, blocks);
+            Vector3[] blocks;
+            synchronized (this.lock) {
+                blocks = this.borders.get(target.getLoaderId()).toArray(new Vector3[0]);
             }
+            target.level.sendBlocks(new Player[]{target}, blocks);
         }
         this.borders.remove(target.getLoaderId());
     }

@@ -2,13 +2,13 @@ package Sergey_Dertan.SRegionProtector.UI.Form.Type;
 
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import cn.nukkit.Player;
-import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.response.FormResponse;
-import cn.nukkit.form.response.FormResponseCustom;
-import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.element.custom.ElementInput;
+import cn.nukkit.form.response.CustomResponse;
+import cn.nukkit.form.response.Response;
+import cn.nukkit.form.window.CustomForm;
 
-final class SetPriorityForm extends FormWindowCustom implements UIForm {
+final class SetPriorityForm extends CustomForm implements UIForm {
 
     private final transient Region region;
 
@@ -28,13 +28,13 @@ final class SetPriorityForm extends FormWindowCustom implements UIForm {
     }
 
     @Override
-    public UIForm handle(FormResponse response, Player player) {
+    public UIForm handle(Response response, Player player) {
         if (!player.hasPermission("sregionprotector.admin") && !this.region.isCreator(player.getName())) return null;
         int priority;
         try {
             String priorityStr = null;
             for (int i = 0; i < 3; ++i) {
-                priorityStr = ((FormResponseCustom) response).getInputResponse(i);
+                priorityStr = ((CustomResponse) response).getInputResponse(i);
                 if (priorityStr != null) break;
             }
             if (priorityStr == null) throw new RuntimeException();

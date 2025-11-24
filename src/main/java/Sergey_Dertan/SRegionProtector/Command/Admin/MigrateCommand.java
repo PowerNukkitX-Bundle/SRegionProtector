@@ -28,8 +28,8 @@ public final class MigrateCommand extends SRegionProtectorCommand {
         providers.remove(DataProvider.Type.UNSUPPORTED.name().toLowerCase());
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
-        parameters.put("srcprovider", new CommandParameter[]{new CommandParameter("from", false, providers.toArray(new String[0]))});
-        parameters.put("targetprovider", new CommandParameter[]{new CommandParameter("to", false, providers.toArray(new String[0]))});
+        parameters.put("srcprovider", new CommandParameter[]{CommandParameter.newEnum("from", false, providers.toArray(new String[0]))});
+        parameters.put("targetprovider", new CommandParameter[]{CommandParameter.newEnum("to", false, providers.toArray(new String[0]))});
         this.setCommandParameters(parameters);
     }
 

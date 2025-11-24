@@ -15,7 +15,7 @@ import Sergey_Dertan.SRegionProtector.Command.Manage.Purchase.RegionRemoveFromSa
 import Sergey_Dertan.SRegionProtector.Command.Manage.Purchase.RegionSellCommand;
 import Sergey_Dertan.SRegionProtector.Command.RegionCommand;
 import Sergey_Dertan.SRegionProtector.Economy.AbstractEconomy;
-import Sergey_Dertan.SRegionProtector.Economy.OneBoneEconomyAPI;
+import Sergey_Dertan.SRegionProtector.Economy.LlamaEconomyAPI;
 import Sergey_Dertan.SRegionProtector.Event.NotifierEventHandler;
 import Sergey_Dertan.SRegionProtector.Event.RegionEventsHandler;
 import Sergey_Dertan.SRegionProtector.Event.SelectorEventsHandler;
@@ -37,9 +37,12 @@ import cn.nukkit.command.Command;
 import cn.nukkit.plugin.LibraryLoadException;
 import cn.nukkit.plugin.LibraryLoader;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.registry.RegisterException;
+import cn.nukkit.registry.Registries;
 import cn.nukkit.utils.TextFormat;
 import cn.nukkit.utils.ThreadCache;
 import cn.nukkit.utils.Utils;
+import lombok.SneakyThrows;
 
 import java.io.File;
 import java.util.Map;
@@ -54,7 +57,7 @@ import static Sergey_Dertan.SRegionProtector.Utils.Utils.httpGetRequestJson;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public final class SRegionProtectorMain extends PluginBase {
 
-    public static final String MAIN_FOLDER = Server.getInstance().getDataPath() + "Sergey_Dertan_Plugins/SRegionProtector/";
+    public static final String MAIN_FOLDER = Server.getInstance().getPluginPath() + "SRegionProtector/";
     public static final String REGIONS_FOLDER = MAIN_FOLDER + "Regions/";
     public static final String FLAGS_FOLDER = MAIN_FOLDER + "Flags/";
     public static final String LANG_FOLDER = MAIN_FOLDER + "Lang/";
@@ -85,8 +88,6 @@ public final class SRegionProtectorMain extends PluginBase {
         if (!this.createDirectories()) return;
         if (!this.initMessenger()) return;
 
-        if (!this.loadLibraries()) return;
-
         if (!this.initSettings()) return;
 
         if (!this.initDataProvider()) return;
@@ -106,8 +107,6 @@ public final class SRegionProtectorMain extends PluginBase {
         this.initSessionsClearTask();
 
         this.gc();
-
-        this.getServer().getScheduler().scheduleTask(this, this::checkUpdate, true);
 
         instance = this;
 
@@ -139,7 +138,11 @@ public final class SRegionProtectorMain extends PluginBase {
     }
 
     private void registerBlockEntity() {
-        BlockEntity.registerBlockEntity(BlockEntityHealer.BLOCK_ENTITY_HEALER, BlockEntityHealer.class);
+        try {
+            Registries.BLOCKENTITY.register(BlockEntityHealer.BLOCK_ENTITY_HEALER, BlockEntityHealer.class);
+        } catch (RegisterException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void initSessionsClearTask() {
@@ -253,7 +256,7 @@ public final class SRegionProtectorMain extends PluginBase {
         this.getServer().getCommandMap().register("sregionprotector", this.mainCommand);
 
         AbstractEconomy economy = null;
-        if (this.getServer().getPluginManager().getPlugin("EconomyAPI") != null) economy = new OneBoneEconomyAPI();
+        if (this.getServer().getPluginManager().getPlugin("LlamaEconomy") != null) economy = new LlamaEconomyAPI();
 
         this.registerCommand(new Pos1Command(this.regionSelector));
 
@@ -314,38 +317,6 @@ public final class SRegionProtectorMain extends PluginBase {
         this.registerCommand(new CopyFlagsCommand(this.regionManager));
     }
 
-    private void checkUpdate() {
-        try {
-            Map<String, Object> response = httpGetRequestJson(VERSION_URL);
-            String ver = (String) response.get("tag_name");
-            String description = (String) response.get("name");
-            if (ver.isEmpty()) return;
-            if (compareVersions(this.getDescription().getVersion(), ver).equals(ver)) {
-                this.getLogger().info(this.messenger.getMessage("loading.init.update-available", "@ver", ver));
-                this.getLogger().info(this.messenger.getMessage("loading.init.update-description", "@description", description));
-
-                if (this.settings.updateNotifier) {
-                    this.getServer().getPluginManager().registerEvents(new NotifierEventHandler(ver, description), this);
-                }
-            }
-        } catch (Exception ignore) {
-        }
-    }
-
-    private boolean loadLibraries() {
-        try {
-            LibraryLoader.load("org.datanucleus:javax.jdo:3.2.0-m11");
-            LibraryLoader.load("org.datanucleus:datanucleus-core:5.2.0-release");
-        } catch (LibraryLoadException e) {
-            this.getLogger().alert(TextFormat.RED + this.messenger.getMessage("loading.error.library"));
-            this.getLogger().alert(Utils.getExceptionMessage(e));
-            this.forceShutdown = true;
-            this.getPluginLoader().disablePlugin(this);
-            return false;
-        }
-        return true;
-    }
-
     private void loadMySQLLibraries() {
         LibraryLoader.load("mysql:mysql-connector-java:8.0.15");
     }
@@ -373,7 +344,7 @@ public final class SRegionProtectorMain extends PluginBase {
     }
 
     private void registerPlaceholders() {
-        if (this.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null || this.getServer().getPluginManager().getPlugin("KotlinLib") == null)
+        if (this.getServer().getPluginManager().getPlugin("PlaceholderAPI") == null)
             return;
         try {
             Class.forName("Sergey_Dertan.SRegionProtector.Utils.PlaceholdersLoader");

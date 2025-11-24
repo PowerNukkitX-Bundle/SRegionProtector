@@ -6,6 +6,7 @@ import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import Sergey_Dertan.SRegionProtector.Utils.Tags;
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemID;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -26,7 +27,7 @@ public final class MembersPage implements Page {
         Map<Integer, Item> list = new HashMap<>(NAVIGATORS_CACHE);
         int counter = 0;
         for (String member : region.getMembers().stream().skip(page * 18).limit(18).collect(Collectors.toList())) {
-            Item item = Item.get(ItemID.SKULL, 3).
+            Item item = Item.get(Block.PLAYER_HEAD).
                     setCustomName(Messenger.getInstance().getMessage("gui.members.member-name", "@member", member)).
                     setLore(Messenger.getInstance().getMessage("gui.members.member-lore"));
             CompoundTag nbt = item.getNamedTag();
@@ -60,7 +61,7 @@ public final class MembersPage implements Page {
 
     @Override
     public Item getIcon() {
-        Item item = Item.get(ItemID.SKULL, 3).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-members"));
+        Item item = Item.get(Block.PLAYER_HEAD).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-members"));
         CompoundTag nbt = item.getNamedTag();
         nbt.putString(Tags.OPEN_PAGE_TAG, this.getName());
         item.setNamedTag(nbt);

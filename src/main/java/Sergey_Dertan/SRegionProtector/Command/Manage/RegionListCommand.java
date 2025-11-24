@@ -24,7 +24,7 @@ public final class RegionListCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("list-type", new CommandParameter[]
                 {
-                        new CommandParameter("type", false, new String[]{"owner", "member", "creator"})
+                        CommandParameter.newEnum("type", false, new String[]{"owner", "member", "creator"})
                 }
         );
         this.setCommandParameters(parameters);
