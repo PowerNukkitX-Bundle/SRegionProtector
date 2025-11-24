@@ -15,4 +15,4 @@ SRegionProtector is a PowerNukkitX plugin that allows players to protect their r
 
 ## !Warning! some flags may not work because they are disabled, pls check config.yml first
 
-## This is a port of the nukkit plugin to PNX. The code does not uses own implementations of PNX APIs so dont use this as a reference when learning PNX!
+## This is a port of the nukkit plugin to PNX. Please do not use this as a reference when learning to code for PNX.
