@@ -6,7 +6,7 @@ import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
@@ -25,8 +25,8 @@ public final class RegionFlagCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("flagdata", new CommandParameter[]
                 {
-                        CommandParameter.newType("region", CommandParamType.STRING),
-                        CommandParameter.newType("flag", CommandParamType.STRING),
+                        CommandParameter.newType("region", CommandParamType.ID),
+                        CommandParameter.newType("flag", CommandParamType.ID),
                         CommandParameter.newEnum("state", false, new String[]{"allow", "deny"})
                 }
         );

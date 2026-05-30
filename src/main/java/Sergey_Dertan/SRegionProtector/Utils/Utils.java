@@ -1,10 +1,9 @@
 package Sergey_Dertan.SRegionProtector.Utils;
 
 import cn.nukkit.Player;
-import cn.nukkit.network.connection.BedrockSession;
-import cn.nukkit.network.protocol.DataPacket;
 import cn.nukkit.utils.Config;
 import com.google.gson.Gson;
+import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -267,8 +266,8 @@ public abstract class Utils {
         throw new RuntimeException("Unreachable code reached");
     }
 
-    public static boolean directDataPacket(Player target, DataPacket pk) {
-        target.dataPacket(pk);
+    public static boolean directDataPacket(Player target, BedrockPacket pk) {
+        target.sendPacket(pk);
         return true;
     }
 }

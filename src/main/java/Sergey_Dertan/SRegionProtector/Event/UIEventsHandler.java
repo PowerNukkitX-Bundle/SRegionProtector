@@ -57,13 +57,13 @@ public final class UIEventsHandler implements Listener {
         Player player = e.getPlayer();
         Inventory source = e.getSourceInventory();
         Item sourceItem = e.getSourceItem();
-        if (sourceItem.getNamedTagEntry(Tags.IS_UI_ITEM_TAG) != null) {
+        if (sourceItem.getNbtEntry(Tags.IS_UI_ITEM_TAG) != null) {
             ChestUIManager.handle(player, sourceItem);
             return;
         }
         if(e.getDestinationItem().isPresent()) {
             Item destItem = e.getDestinationItem().get();
-            if (destItem.getNamedTagEntry(Tags.IS_UI_ITEM_TAG) != null) {
+            if (destItem.getNbtEntry(Tags.IS_UI_ITEM_TAG) != null) {
                 ChestUIManager.handle(player, destItem);
                 return;
             }

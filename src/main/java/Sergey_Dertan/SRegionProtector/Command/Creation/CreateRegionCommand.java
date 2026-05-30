@@ -9,7 +9,7 @@ import Sergey_Dertan.SRegionProtector.Region.Selector.SelectorSession;
 import Sergey_Dertan.SRegionProtector.Settings.RegionSettings;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.level.Position;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
@@ -33,7 +33,7 @@ public final class CreateRegionCommand extends SRegionProtectorCommand {
         this.pricePerBlock = pricePerBlock;
 
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
-        parameters.put("rgname", new CommandParameter[]{CommandParameter.newType("region", CommandParamType.STRING)});
+        parameters.put("rgname", new CommandParameter[]{CommandParameter.newType("region", CommandParamType.ID)});
         this.setCommandParameters(parameters);
     }
 

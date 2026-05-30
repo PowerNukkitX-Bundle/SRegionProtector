@@ -31,9 +31,9 @@ public final class OwnersPage implements Page {
                     setCustomName(Messenger.getInstance().getMessage("gui.owners.owner-name", "@owner", owner)).
                     setLore(Messenger.getInstance().getMessage("gui.owners.owner-lore"));
             @SuppressWarnings("Duplicates")
-            CompoundTag nbt = item.getNamedTag();
+            CompoundTag nbt = item.getNbt();
             nbt.putString(Tags.TARGET_NAME_TAG, owner);
-            item.setNamedTag(nbt);
+            item.setNbt(nbt);
             list.put(counter, item);
             ++counter;
         }
@@ -44,7 +44,7 @@ public final class OwnersPage implements Page {
     @Override
     public boolean handle(Item item, Region region, Player player) {
         if (!this.hasPermission(player, region)) return false;
-        String target = item.getNamedTag().getString(Tags.TARGET_NAME_TAG);
+        String target = item.getNbt().getString(Tags.TARGET_NAME_TAG);
         if (target.isEmpty() || !region.isOwner(target)) return false;
         this.regionManager.removeOwner(region, target);
         return true;
@@ -63,9 +63,9 @@ public final class OwnersPage implements Page {
     @Override
     public Item getIcon() {
         Item item = Item.get(ItemID.PLAYER_HEAD).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-owners"));
-        CompoundTag nbt = item.getNamedTag();
+        CompoundTag nbt = item.getNbt();
         nbt.putString(Tags.OPEN_PAGE_TAG, this.getName());
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
         return item;
     }
 }

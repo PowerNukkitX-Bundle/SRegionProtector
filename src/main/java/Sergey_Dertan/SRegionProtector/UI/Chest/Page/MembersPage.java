@@ -30,9 +30,9 @@ public final class MembersPage implements Page {
             Item item = Item.get(Block.PLAYER_HEAD).
                     setCustomName(Messenger.getInstance().getMessage("gui.members.member-name", "@member", member)).
                     setLore(Messenger.getInstance().getMessage("gui.members.member-lore"));
-            CompoundTag nbt = item.getNamedTag();
+            CompoundTag nbt = item.getNbt();
             nbt.putString(Tags.TARGET_NAME_TAG, member);
-            item.setNamedTag(nbt);
+            item.setNbt(nbt);
             list.put(counter, item);
             ++counter;
         }
@@ -43,7 +43,7 @@ public final class MembersPage implements Page {
     @Override
     public boolean handle(Item item, Region region, Player player) {
         if (!this.hasPermission(player, region)) return false;
-        String target = item.getNamedTag().getString(Tags.TARGET_NAME_TAG);
+        String target = item.getNbt().getString(Tags.TARGET_NAME_TAG);
         if (target.isEmpty() || !region.isMember(target)) return false;
         this.regionManager.removeMember(region, target);
         return true;
@@ -62,9 +62,9 @@ public final class MembersPage implements Page {
     @Override
     public Item getIcon() {
         Item item = Item.get(Block.PLAYER_HEAD).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-members"));
-        CompoundTag nbt = item.getNamedTag();
+        CompoundTag nbt = item.getNbt();
         nbt.putString(Tags.OPEN_PAGE_TAG, this.getName());
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
         return item;
     }
 }

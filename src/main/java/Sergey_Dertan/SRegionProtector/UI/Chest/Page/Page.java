@@ -34,19 +34,19 @@ public interface Page {
 
         nbt = new CompoundTag();
         nbt.putByte(Tags.PREVIOUS_PAGE_TAG, 1);
-        this.put(21, Item.get(ItemID.APPLE).setNamedTag(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.previous-page")));
+        this.put(21, Item.get(ItemID.APPLE).setNbt(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.previous-page")));
 
         nbt = new CompoundTag();
         nbt.putByte(Tags.REFRESH_PAGE_TAG, 1);
-        this.put(22, Item.get(ItemID.COOKIE).setNamedTag(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.refresh")));
+        this.put(22, Item.get(ItemID.COOKIE).setNbt(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.refresh")));
 
         nbt = new CompoundTag();
         nbt.putByte(Tags.NEXT_PAGE_TAG, 1);
-        this.put(23, Item.get(ItemID.APPLE).setNamedTag(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.next-page")));
+        this.put(23, Item.get(ItemID.APPLE).setNbt(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.next-page")));
 
         nbt = new CompoundTag();
         nbt.putString(Tags.OPEN_PAGE_TAG, MAIN.getName());
-        this.put(26, Item.get(ItemID.SLIME_BALL).setNamedTag(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.back")));
+        this.put(26, Item.get(ItemID.SLIME_BALL).setNbt(nbt).setCustomName(Messenger.getInstance().getMessage("gui.navigator.back")));
     }};
 
     static Page getPage(String name) {
@@ -72,11 +72,11 @@ public interface Page {
      * mark item as a UI item and add current page number and page name tags
      */
     default void prepareItem(Item item, int page) {
-        CompoundTag nbt = item.hasCompoundTag() ? item.getNamedTag() : new CompoundTag();
+        CompoundTag nbt = item.hasNbt() ? item.getNbt() : new CompoundTag();
         nbt.putByte(Tags.IS_UI_ITEM_TAG, 1);
         nbt.putInt(Tags.CURRENT_PAGE_NUMBER_TAG, page);
         if (this.getName() != null) nbt.putString(Tags.CURRENT_PAGE_NAME_TAG, this.getName());
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
     }
 
     default void prepareItems(Collection<Item> items) {

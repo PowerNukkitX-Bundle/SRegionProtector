@@ -47,7 +47,7 @@ public final class RegionCommand extends SRegionProtectorCommand {
             return null;
         }
 
-        CommandData customData = this.commandData.clone();
+        NukkitCommandData customData = this.commandData.clone();
 
         List<String> aliases = new ArrayList<>();
         aliases.add("region");

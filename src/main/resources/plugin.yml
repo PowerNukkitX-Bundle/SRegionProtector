@@ -1,6 +1,6 @@
 name: "${pom.artifactId}"
 main: Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain
-api: [2.0.0]
+api: [3.0.0]
 version: "${pom.version}"
 author: Sergey_Dertan
 website: http://t.me/Sergey57ss

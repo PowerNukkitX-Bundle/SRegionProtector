@@ -3,11 +3,13 @@ package Sergey_Dertan.SRegionProtector.Region.Selector;
 import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.network.protocol.UpdateBlockPacket;
 import cn.nukkit.registry.Registries;
+import cn.nukkit.utils.RuntimeBlockDefinition;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import org.cloudburstmc.math.vector.Vector3i;
+import org.cloudburstmc.protocol.bedrock.packet.UpdateBlockPacket;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -71,12 +73,10 @@ public final class RegionSelector {
             for (int xt = minX; ; xt = maxX) {
                 for (int zt = minZ; ; zt = maxZ) {
                     UpdateBlockPacket pk = new UpdateBlockPacket();
-                    pk.x = xt;
-                    pk.y = yt;
-                    pk.z = zt;
-                    pk.flags = UpdateBlockPacket.FLAG_ALL;
-                    pk.blockRuntimeId = this.borderBlock;
-                    target.dataPacket(pk);
+                    pk.setBlockPosition(Vector3i.from(xt, yt, zt));
+                    pk.getFlags().addAll(UpdateBlockPacket.FLAG_ALL);
+                    pk.setDefinition(new RuntimeBlockDefinition(this.borderBlock));
+                    target.sendPacket(pk);
                     blocks.add(new Vector3(xt, yt, zt));
                     if (zt == maxZ) break;
                 }
@@ -88,12 +88,10 @@ public final class RegionSelector {
             for (int zd = minZ; ; zd = maxZ) {
                 for (int zx = minX; zx <= maxX; ++zx) {
                     UpdateBlockPacket pk = new UpdateBlockPacket();
-                    pk.x = zx;
-                    pk.y = yd;
-                    pk.z = zd;
-                    pk.flags = UpdateBlockPacket.FLAG_ALL;
-                    pk.blockRuntimeId = this.borderBlock;
-                    target.dataPacket(pk);
+                    pk.setBlockPosition(Vector3i.from(zx, yd, zd));
+                    pk.getFlags().addAll(UpdateBlockPacket.FLAG_ALL);
+                    pk.setDefinition(new RuntimeBlockDefinition(this.borderBlock));
+                    target.sendPacket(pk);
                     blocks.add(new Vector3(zx, yd, zd));
                 }
                 if (zd == maxZ) break;
@@ -102,12 +100,10 @@ public final class RegionSelector {
             for (int xd = minX; ; xd = maxX) {
                 for (int zx = minZ; zx <= maxZ; ++zx) {
                     UpdateBlockPacket pk = new UpdateBlockPacket();
-                    pk.x = xd;
-                    pk.y = yd;
-                    pk.z = zx;
-                    pk.flags = UpdateBlockPacket.FLAG_ALL;
-                    pk.blockRuntimeId = this.borderBlock;
-                    target.dataPacket(pk);
+                    pk.setBlockPosition(Vector3i.from(xd, yd, zx));
+                    pk.getFlags().addAll(UpdateBlockPacket.FLAG_ALL);
+                    pk.setDefinition(new RuntimeBlockDefinition(this.borderBlock));
+                    target.sendPacket(pk);
                     blocks.add(new Vector3(xd, yd, zx));
                 }
                 if (xd == maxX) break;

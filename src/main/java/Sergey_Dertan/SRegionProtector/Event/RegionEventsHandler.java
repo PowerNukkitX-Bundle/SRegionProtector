@@ -9,6 +9,7 @@ import Sergey_Dertan.SRegionProtector.Utils.Pair;
 import Sergey_Dertan.SRegionProtector.Utils.Tags;
 import cn.nukkit.Player;
 import cn.nukkit.block.*;
+import cn.nukkit.block.dispenser.BlockDispenser;
 import cn.nukkit.blockentity.BlockEntityHopper;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
@@ -43,10 +44,9 @@ import cn.nukkit.level.particle.AngryVillagerParticle;
 import cn.nukkit.level.particle.Particle;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.Vector3;
-import cn.nukkit.network.protocol.DataPacket;
-import cn.nukkit.network.protocol.ItemFrameDropItemPacket;
 import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 
 import java.util.*;
 
@@ -427,8 +427,8 @@ public final class RegionEventsHandler implements Listener {
                     pPos = new Vector3(pos.x + 0.5, pos.y + 1.3, pos.z + 0.5);
                 }
                 Particle particle = new AngryVillagerParticle(pPos);
-                for (DataPacket pk : particle.encode()) {
-                    player.dataPacket(pk);
+                for (BedrockPacket pk : particle.encode()) {
+                    player.sendPacket(pk);
                 }
             }
             ev.setCancelled();

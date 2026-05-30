@@ -78,12 +78,12 @@ public final class BlockEntityHealer extends BlockEntitySpawnable {
 
     @Override
     public void saveNBT() {
-        this.namedTag.putString(ID_TAG, BLOCK_ENTITY_HEALER);
-        this.namedTag.putString(REGION_TAG, this.region);
-        this.namedTag.putInt(X_TAG, this.getFloorX());
-        this.namedTag.putInt(Y_TAG, this.getFloorY());
-        this.namedTag.putInt(Z_TAG, this.getFloorZ());
-        this.namedTag.putBoolean(IS_MOVABLE_TAG, false);
+        this.nbt.putString(ID_TAG, BLOCK_ENTITY_HEALER);
+        this.nbt.putString(REGION_TAG, this.region);
+        this.nbt.putInt(X_TAG, this.getFloorX());
+        this.nbt.putInt(Y_TAG, this.getFloorY());
+        this.nbt.putInt(Z_TAG, this.getFloorZ());
+        this.nbt.putBoolean(IS_MOVABLE_TAG, false);
     }
 
     @Override

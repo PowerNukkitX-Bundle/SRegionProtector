@@ -84,7 +84,7 @@ public final class FlagsPage implements Page {
                 }
             }
             item.setLore(lore[1] == null ? new String[]{lore[0]} : lore);
-            CompoundTag nbt = item.getNamedTag();
+            CompoundTag nbt = item.getNbt();
             nbt.putInt(Tags.FLAG_ID_TAG, flagId);
             list.put(counter, item);
             ++counter;
@@ -96,7 +96,7 @@ public final class FlagsPage implements Page {
     @Override
     public boolean handle(Item item, Region region, Player player) {
         if (!this.hasPermission(player, region)) return false;
-        Tag tag = item.getNamedTagEntry(Tags.FLAG_ID_TAG);
+        Tag tag = item.getNbtEntry(Tags.FLAG_ID_TAG);
         if (!(tag instanceof IntTag)) return false;
         int flagId = ((IntTag) tag).data;
         if (flagId == RegionFlags.FLAG_SELL || flagId == RegionFlags.FLAG_TELEPORT) return false;
@@ -118,9 +118,9 @@ public final class FlagsPage implements Page {
     @Override
     public Item getIcon() {
         Item item = Item.get(ItemID.BANNER).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-flags"));
-        CompoundTag nbt = item.getNamedTag();
+        CompoundTag nbt = item.getNbt();
         nbt.putString(Tags.OPEN_PAGE_TAG, this.getName());
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
         return item;
     }
 

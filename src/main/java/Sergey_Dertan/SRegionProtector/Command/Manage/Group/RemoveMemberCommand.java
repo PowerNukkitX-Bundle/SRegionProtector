@@ -5,7 +5,7 @@ import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
@@ -22,8 +22,8 @@ public final class RemoveMemberCommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("removemember", new CommandParameter[]
                 {
-                        CommandParameter.newType("region", CommandParamType.STRING),
-                        CommandParameter.newType("player", CommandParamType.TARGET)
+                        CommandParameter.newType("region", CommandParamType.ID),
+                        CommandParameter.newType("player", CommandParamType.SELECTION)
                 }
         );
         this.setCommandParameters(parameters);

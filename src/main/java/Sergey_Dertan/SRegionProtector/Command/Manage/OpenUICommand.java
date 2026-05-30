@@ -10,7 +10,7 @@ import Sergey_Dertan.SRegionProtector.UI.UIType;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.math.Vector3;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
@@ -33,7 +33,7 @@ public final class OpenUICommand extends SRegionProtectorCommand {
         Map<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
         parameters.put("guitarget", new CommandParameter[]
                 {
-                        CommandParameter.newType("region", true, CommandParamType.STRING)
+                        CommandParameter.newType("region", true, CommandParamType.ID)
                 }
         );
         this.setCommandParameters(parameters);

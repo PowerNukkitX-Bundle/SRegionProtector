@@ -4,7 +4,6 @@ import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.network.protocol.TextPacket;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.Utils;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
@@ -92,12 +91,28 @@ public final class Messenger {
 
     public void sendMessage(CommandSender target, String message, String[] search, String[] replace, MessageType type) {
         if (!this.async || !(target instanceof Player) || this.withNemisys) {
-            target.sendMessage(this.getMessage(message, search, replace));
+            this.sendMessageByType(target, this.getMessage(message, search, replace), type);
         } else {
-            TextPacket pk = new TextPacket();
-            pk.type = type.id;
-            pk.message = this.getMessage(message, search, replace);
-            directDataPacket((Player) target, pk);
+            this.sendMessageByType(target, this.getMessage(message, search, replace), type);
+        }
+    }
+
+    private void sendMessageByType(CommandSender target, String message, MessageType type) {
+        if (!(target instanceof Player player)) {
+            target.sendMessage(message);
+            return;
+        }
+        switch (type) {
+            case TIP:
+                player.sendTip(message);
+                break;
+            case POPUP:
+                player.sendPopup(message);
+                break;
+            case MESSAGE:
+            default:
+                player.sendMessage(message);
+                break;
         }
     }
 
@@ -122,15 +137,9 @@ public final class Messenger {
     }
 
     public enum MessageType {
-        MESSAGE(TextPacket.TYPE_RAW),
-        TIP(TextPacket.TYPE_TIP),
-        POPUP(TextPacket.TYPE_POPUP);
-
-        public final byte id;
-
-        MessageType(byte id) {
-            this.id = id;
-        }
+        MESSAGE,
+        TIP,
+        POPUP;
 
         public static MessageType fromString(String name) {
             switch (name.toLowerCase()) {

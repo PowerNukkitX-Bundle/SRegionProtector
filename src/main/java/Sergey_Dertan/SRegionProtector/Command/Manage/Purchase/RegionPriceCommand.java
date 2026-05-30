@@ -4,7 +4,7 @@ import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
@@ -18,7 +18,7 @@ public final class RegionPriceCommand extends SRegionProtectorCommand {
         this.regionManager = regionManager;
 
         Object2ObjectMap<String, CommandParameter[]> parameters = new Object2ObjectArrayMap<>();
-        parameters.put("rgprice", new CommandParameter[]{CommandParameter.newType("region", CommandParamType.STRING)});
+        parameters.put("rgprice", new CommandParameter[]{CommandParameter.newType("region", CommandParamType.ID)});
         this.setCommandParameters(parameters);
     }
 

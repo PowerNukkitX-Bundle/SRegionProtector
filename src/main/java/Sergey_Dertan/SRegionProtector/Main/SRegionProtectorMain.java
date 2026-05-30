@@ -40,7 +40,6 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.registry.RegisterException;
 import cn.nukkit.registry.Registries;
 import cn.nukkit.utils.TextFormat;
-import cn.nukkit.utils.ThreadCache;
 import cn.nukkit.utils.Utils;
 import lombok.SneakyThrows;
 
@@ -114,7 +113,6 @@ public final class SRegionProtectorMain extends PluginBase {
     }
 
     private void gc() {
-        ThreadCache.clean();
         System.gc();
     }
 

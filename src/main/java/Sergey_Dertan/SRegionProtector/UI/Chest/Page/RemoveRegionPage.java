@@ -29,15 +29,15 @@ public final class RemoveRegionPage implements Page {
         CompoundTag nbt;
 
         item = Item.get(ItemID.EMERALD).setCustomName(Messenger.getInstance().getMessage("gui.remove.cancel"));
-        nbt = item.getNamedTag();
+        nbt = item.getNbt();
         nbt.putString(Tags.OPEN_PAGE_TAG, MAIN.getName());
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
         items.put(12, item);
 
         item = Item.get(BlockID.REDSTONE_BLOCK).setCustomName(Messenger.getInstance().getMessage("gui.remove.apply"));
-        nbt = item.getNamedTag();
+        nbt = item.getNbt();
         nbt.putByte(Tags.REMOVE_REGION_TAG, 1);
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
         items.put(14, item);
 
         this.prepareItems(items.values());
@@ -47,7 +47,7 @@ public final class RemoveRegionPage implements Page {
 
     @Override
     public boolean handle(Item item, Region region, Player player) {
-        if (item.getNamedTagEntry(Tags.REMOVE_REGION_TAG) != null && this.hasPermission(player, region) && this.regionManager.regionExists(region.getName())) {
+        if (item.getNbtEntry(Tags.REMOVE_REGION_TAG) != null && this.hasPermission(player, region) && this.regionManager.regionExists(region.getName())) {
             this.regionManager.removeRegion(region);
             return true;
         }
@@ -67,9 +67,9 @@ public final class RemoveRegionPage implements Page {
     @Override
     public Item getIcon() {
         Item item = Item.get(BlockID.TNT).setCustomName(Messenger.getInstance().getMessage("gui.main.go-to-remove"));
-        CompoundTag nbt = item.getNamedTag();
+        CompoundTag nbt = item.getNbt();
         nbt.putString(Tags.OPEN_PAGE_TAG, this.getName());
-        item.setNamedTag(nbt);
+        item.setNbt(nbt);
         return item;
     }
 }
