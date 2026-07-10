@@ -1,6 +1,6 @@
 package Sergey_Dertan.SRegionProtector.Economy;
 
-import cn.nukkit.Player;
+import org.powernukkitx.Player;
 
 @SuppressWarnings("unused")
 public interface AbstractEconomy {

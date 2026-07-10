@@ -4,9 +4,9 @@ import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionGroup;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParameter;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
 import java.util.ArrayList;

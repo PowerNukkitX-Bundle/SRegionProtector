@@ -6,7 +6,7 @@ import Sergey_Dertan.SRegionProtector.Region.Flags.Flag.RegionTeleportFlag;
 import Sergey_Dertan.SRegionProtector.Region.Flags.RegionFlags;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Utils.Utils;
-import cn.nukkit.math.Vector3;
+import org.powernukkitx.math.Vector3;
 import com.google.gson.Gson;
 
 import java.util.*;

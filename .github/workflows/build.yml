@@ -26,6 +26,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          server-id: powernukkitx-releases
+          server-username: PNX_REPO_USERNAME
+          server-password: PNX_REPO_PASSWORD
 
       - name: Build with Maven
         run: mvn -B package -DskipTests=false -Darguments="-Dmaven.javadoc.skip=true"
@@ -75,3 +78,10 @@ jobs:
           else
             gh release create "$RELEASE_TAG" "${{ steps.project.outputs.jar_path }}" --target "${{ github.sha }}" --title "$RELEASE_TAG" --notes "Automated release for $RELEASE_TAG"
           fi
+
+      - name: Deploy to PowerNukkitX repository
+        if: github.event_name == 'push' && (github.ref_type == 'tag' || github.ref_name == github.event.repository.default_branch)
+        run: mvn -B deploy -DskipTests -Darguments="-Dmaven.javadoc.skip=true" -DaltDeploymentRepository=powernukkitx-releases::default::https://repo.powernukkitx.org/releases
+        env:
+          PNX_REPO_USERNAME: ${{ secrets.PNX_REPO_USERNAME }}
+          PNX_REPO_PASSWORD: ${{ secrets.PNX_REPO_PASSWORD }}

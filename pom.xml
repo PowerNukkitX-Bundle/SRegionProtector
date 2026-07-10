@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>sergeydertan.sregionprotector</groupId>
+    <groupId>net.sergeydertan.sregionprotector</groupId>
     <artifactId>SRegionProtector</artifactId>
-    <version>30.1</version>
+    <version>30.2</version>
     <name>SRegionProtector</name>
     <description>Flexible region protection plugin for PowerNukkitX</description>
     <url>https://github.com/SergeyDertan/SRegionProtector</url>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>org.powernukkitx</groupId>
             <artifactId>server</artifactId>
-            <version>b-migration-SNAPSHOT</version>
+            <version>nightly-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -81,9 +81,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.PowerNukkitX-Bundle</groupId>
+            <groupId>net.lldv.llamaeconomy</groupId>
             <artifactId>LlamaEconomy</artifactId>
-            <version>34abcee45d</version>
+            <version>1.0.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

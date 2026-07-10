@@ -1,12 +1,12 @@
 package Sergey_Dertan.SRegionProtector.UI.Chest;
 
 import Sergey_Dertan.SRegionProtector.Region.Region;
-import cn.nukkit.inventory.ContainerInventory;
-import cn.nukkit.inventory.Inventory;
-import cn.nukkit.inventory.InventoryHolder;
-import cn.nukkit.item.Item;
-import cn.nukkit.level.Level;
-import cn.nukkit.math.Vector3;
+import org.powernukkitx.inventory.ContainerInventory;
+import org.powernukkitx.inventory.Inventory;
+import org.powernukkitx.inventory.InventoryHolder;
+import org.powernukkitx.item.Item;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.math.Vector3;
 import org.cloudburstmc.protocol.bedrock.data.inventory.ContainerEnumName;
 import org.cloudburstmc.protocol.bedrock.data.inventory.ContainerType;
 

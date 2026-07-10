@@ -2,7 +2,7 @@ package Sergey_Dertan.SRegionProtector.Command.Admin;
 
 import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
-import cn.nukkit.command.CommandSender;
+import org.powernukkitx.command.CommandSender;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
 public final class SaveCommand extends SRegionProtectorCommand {

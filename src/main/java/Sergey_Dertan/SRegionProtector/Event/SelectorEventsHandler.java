@@ -3,17 +3,17 @@ package Sergey_Dertan.SRegionProtector.Event;
 import Sergey_Dertan.SRegionProtector.Messenger.Messenger;
 import Sergey_Dertan.SRegionProtector.Region.Selector.RegionSelector;
 import Sergey_Dertan.SRegionProtector.Region.Selector.SelectorSession;
-import cn.nukkit.Player;
-import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockAir;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.block.BlockBreakEvent;
-import cn.nukkit.event.player.PlayerInteractEvent;
-import cn.nukkit.event.player.PlayerQuitEvent;
-import cn.nukkit.item.Item;
-import cn.nukkit.level.Position;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.block.BlockAir;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.block.BlockBreakEvent;
+import org.powernukkitx.event.player.PlayerInteractEvent;
+import org.powernukkitx.event.player.PlayerQuitEvent;
+import org.powernukkitx.item.Item;
+import org.powernukkitx.level.Position;
 
 @SuppressWarnings("unused")
 public final class SelectorEventsHandler implements Listener {

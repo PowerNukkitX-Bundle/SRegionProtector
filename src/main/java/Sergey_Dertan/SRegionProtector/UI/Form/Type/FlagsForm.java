@@ -5,9 +5,9 @@ import Sergey_Dertan.SRegionProtector.Region.Flags.Flag.RegionFlag;
 import Sergey_Dertan.SRegionProtector.Region.Flags.RegionFlags;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.UI.Form.Element.Button;
-import cn.nukkit.Player;
-import cn.nukkit.form.element.simple.ButtonImage;
-import cn.nukkit.form.window.SimpleForm;
+import org.powernukkitx.Player;
+import org.powernukkitx.form.element.simple.ButtonImage;
+import org.powernukkitx.form.window.SimpleForm;
 
 import java.util.Arrays;
 

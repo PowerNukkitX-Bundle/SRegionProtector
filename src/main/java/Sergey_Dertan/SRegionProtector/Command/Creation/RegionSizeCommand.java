@@ -3,8 +3,8 @@ package Sergey_Dertan.SRegionProtector.Command.Creation;
 import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Region.Selector.RegionSelector;
 import Sergey_Dertan.SRegionProtector.Region.Selector.SelectorSession;
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
 public final class RegionSizeCommand extends SRegionProtectorCommand {

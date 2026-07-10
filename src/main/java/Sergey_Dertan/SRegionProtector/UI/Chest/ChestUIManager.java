@@ -6,14 +6,14 @@ import Sergey_Dertan.SRegionProtector.UI.Chest.Page.Page;
 import Sergey_Dertan.SRegionProtector.UI.Chest.Page.RemoveRegionPage;
 import Sergey_Dertan.SRegionProtector.Utils.Tags;
 import Sergey_Dertan.SRegionProtector.Utils.Utils;
-import cn.nukkit.Player;
-import cn.nukkit.block.BlockChest;
-import cn.nukkit.block.BlockID;
-import cn.nukkit.inventory.Inventory;
-import cn.nukkit.item.Item;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.utils.RuntimeBlockDefinition;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.BlockChest;
+import org.powernukkitx.block.BlockID;
+import org.powernukkitx.inventory.Inventory;
+import org.powernukkitx.item.Item;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.nbt.tag.CompoundTag;
+import org.powernukkitx.utils.RuntimeBlockDefinition;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import org.cloudburstmc.math.vector.Vector3i;
@@ -27,7 +27,7 @@ public abstract class ChestUIManager {
     /**
      * async packets should be put directly to the interface
      *
-     * @see cn.nukkit.event.server.DataPacketSendEvent
+     * @see org.powernukkitx.event.server.DataPacketSendEvent
      */
     private static boolean async;
 

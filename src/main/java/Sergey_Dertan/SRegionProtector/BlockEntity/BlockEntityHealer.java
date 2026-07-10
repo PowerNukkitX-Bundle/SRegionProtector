@@ -4,13 +4,13 @@ import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
 import Sergey_Dertan.SRegionProtector.Region.Flags.RegionFlags;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
-import cn.nukkit.Player;
-import cn.nukkit.blockentity.BlockEntitySpawnable;
-import cn.nukkit.entity.Entity;
-import cn.nukkit.level.format.IChunk;
-import cn.nukkit.math.AxisAlignedBB;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.nbt.tag.CompoundTag;
+import org.powernukkitx.Player;
+import org.powernukkitx.blockentity.BlockEntitySpawnable;
+import org.powernukkitx.entity.Entity;
+import org.powernukkitx.level.format.IChunk;
+import org.powernukkitx.math.AxisAlignedBB;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.nbt.tag.CompoundTag;
 
 import static Sergey_Dertan.SRegionProtector.Utils.Tags.*;
 

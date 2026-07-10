@@ -4,9 +4,9 @@ import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
 import Sergey_Dertan.SRegionProtector.Messenger.Messenger;
 import Sergey_Dertan.SRegionProtector.Provider.DataProvider;
 import Sergey_Dertan.SRegionProtector.UI.UIType;
-import cn.nukkit.block.Block;
-import cn.nukkit.item.Item;
-import cn.nukkit.utils.Config;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.item.Item;
+import org.powernukkitx.utils.Config;
 
 import java.util.Map;
 

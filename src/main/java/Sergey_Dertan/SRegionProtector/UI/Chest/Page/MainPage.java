@@ -2,9 +2,9 @@ package Sergey_Dertan.SRegionProtector.UI.Chest.Page;
 
 import Sergey_Dertan.SRegionProtector.Messenger.Messenger;
 import Sergey_Dertan.SRegionProtector.Region.Region;
-import cn.nukkit.Player;
-import cn.nukkit.block.BlockID;
-import cn.nukkit.item.Item;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.BlockID;
+import org.powernukkitx.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;

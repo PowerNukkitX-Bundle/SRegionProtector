@@ -2,8 +2,8 @@ package Sergey_Dertan.SRegionProtector.Command;
 
 import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
 import Sergey_Dertan.SRegionProtector.Messenger.Messenger;
-import cn.nukkit.command.Command;
-import cn.nukkit.command.PluginIdentifiableCommand;
+import org.powernukkitx.command.Command;
+import org.powernukkitx.command.PluginIdentifiableCommand;
 
 public abstract class SRegionProtectorCommand extends Command implements PluginIdentifiableCommand {
 

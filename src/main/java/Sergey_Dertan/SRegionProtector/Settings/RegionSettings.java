@@ -2,8 +2,8 @@ package Sergey_Dertan.SRegionProtector.Settings;
 
 import Sergey_Dertan.SRegionProtector.BlockEntity.BlockEntityHealer;
 import Sergey_Dertan.SRegionProtector.Region.Flags.RegionFlags;
-import cn.nukkit.permission.Permissible;
-import cn.nukkit.permission.PermissionAttachmentInfo;
+import org.powernukkitx.permission.Permissible;
+import org.powernukkitx.permission.PermissionAttachmentInfo;
 
 import java.util.Arrays;
 import java.util.Map;

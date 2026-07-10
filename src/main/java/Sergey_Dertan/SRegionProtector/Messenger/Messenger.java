@@ -1,11 +1,11 @@
 package Sergey_Dertan.SRegionProtector.Messenger;
 
 import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
-import cn.nukkit.Player;
-import cn.nukkit.Server;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.utils.Config;
-import cn.nukkit.utils.Utils;
+import org.powernukkitx.Player;
+import org.powernukkitx.Server;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.utils.Config;
+import org.powernukkitx.utils.Utils;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;

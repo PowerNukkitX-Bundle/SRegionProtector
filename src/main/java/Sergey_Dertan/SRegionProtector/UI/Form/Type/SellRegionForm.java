@@ -1,12 +1,12 @@
 package Sergey_Dertan.SRegionProtector.UI.Form.Type;
 
 import Sergey_Dertan.SRegionProtector.Region.Region;
-import cn.nukkit.Player;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.element.custom.ElementInput;
-import cn.nukkit.form.response.CustomResponse;
-import cn.nukkit.form.response.Response;
-import cn.nukkit.form.window.CustomForm;
+import org.powernukkitx.Player;
+import org.powernukkitx.form.element.ElementLabel;
+import org.powernukkitx.form.element.custom.ElementInput;
+import org.powernukkitx.form.response.CustomResponse;
+import org.powernukkitx.form.response.Response;
+import org.powernukkitx.form.window.CustomForm;
 
 final class SellRegionForm extends CustomForm implements UIForm {
 

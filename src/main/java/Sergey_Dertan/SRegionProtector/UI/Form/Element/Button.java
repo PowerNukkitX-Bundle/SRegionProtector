@@ -1,8 +1,8 @@
 package Sergey_Dertan.SRegionProtector.UI.Form.Element;
 
 import Sergey_Dertan.SRegionProtector.UI.Form.Type.UIForm;
-import cn.nukkit.form.element.simple.ButtonImage;
-import cn.nukkit.form.element.simple.ElementButton;
+import org.powernukkitx.form.element.simple.ButtonImage;
+import org.powernukkitx.form.element.simple.ElementButton;
 
 public final class Button extends ElementButton {
 

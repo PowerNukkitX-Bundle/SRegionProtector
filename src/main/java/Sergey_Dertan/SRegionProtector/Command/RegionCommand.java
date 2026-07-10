@@ -2,10 +2,10 @@ package Sergey_Dertan.SRegionProtector.Command;
 
 import Sergey_Dertan.SRegionProtector.Command.Manage.Purchase.BuyRegionCommand;
 import Sergey_Dertan.SRegionProtector.UI.Chest.ChestUIManager;
-import cn.nukkit.Player;
-import cn.nukkit.command.Command;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.*;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.Command;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectAVLTreeMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 

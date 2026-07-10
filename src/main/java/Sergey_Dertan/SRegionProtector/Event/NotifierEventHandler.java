@@ -2,10 +2,10 @@ package Sergey_Dertan.SRegionProtector.Event;
 
 import Sergey_Dertan.SRegionProtector.Messenger.Messenger;
 import Sergey_Dertan.SRegionProtector.Utils.Pair;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.server.PacketReceiveEvent;
-import cn.nukkit.utils.TextFormat;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.server.PacketReceiveEvent;
+import org.powernukkitx.utils.TextFormat;
 import org.cloudburstmc.protocol.bedrock.packet.SetLocalPlayerAsInitializedPacket;
 
 @SuppressWarnings("unused")

@@ -1,7 +1,7 @@
 package Sergey_Dertan.SRegionProtector.Utils;
 
-import cn.nukkit.Player;
-import cn.nukkit.utils.Config;
+import org.powernukkitx.Player;
+import org.powernukkitx.utils.Config;
 import com.google.gson.Gson;
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket;
 import org.yaml.snakeyaml.DumperOptions;
@@ -134,7 +134,7 @@ public abstract class Utils {
         if (targetFolder.charAt(targetFolder.length() - 1) != '/') targetFolder += '/';
         File file = new File(targetFolder + fileName);
         if (!file.exists()) {
-            cn.nukkit.utils.Utils.writeFile(file, clazz.getClassLoader().getResourceAsStream(sourceFolder + fileName));
+            org.powernukkitx.utils.Utils.writeFile(file, clazz.getClassLoader().getResourceAsStream(sourceFolder + fileName));
             return;
         }
         if (!fixMissingContents) return;

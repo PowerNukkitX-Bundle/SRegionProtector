@@ -1,7 +1,7 @@
 package Sergey_Dertan.SRegionProtector.Region.Selector;
 
-import cn.nukkit.level.Level;
-import cn.nukkit.level.Position;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.level.Position;
 
 @SuppressWarnings("WeakerAccess")
 public final class SelectorSession {

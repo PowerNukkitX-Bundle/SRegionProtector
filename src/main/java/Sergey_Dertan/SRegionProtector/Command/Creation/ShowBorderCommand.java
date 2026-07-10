@@ -3,9 +3,9 @@ package Sergey_Dertan.SRegionProtector.Command.Creation;
 import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Region.Selector.RegionSelector;
 import Sergey_Dertan.SRegionProtector.Region.Selector.SelectorSession;
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParameter;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
 
 import java.util.HashMap;
 import java.util.Map;

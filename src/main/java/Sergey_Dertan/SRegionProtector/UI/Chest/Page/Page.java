@@ -3,10 +3,10 @@ package Sergey_Dertan.SRegionProtector.UI.Chest.Page;
 import Sergey_Dertan.SRegionProtector.Messenger.Messenger;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Utils.Tags;
-import cn.nukkit.Player;
-import cn.nukkit.item.Item;
-import cn.nukkit.item.ItemID;
-import cn.nukkit.nbt.tag.CompoundTag;
+import org.powernukkitx.Player;
+import org.powernukkitx.item.Item;
+import org.powernukkitx.item.ItemID;
+import org.powernukkitx.nbt.tag.CompoundTag;
 
 import java.util.Collection;
 import java.util.HashMap;

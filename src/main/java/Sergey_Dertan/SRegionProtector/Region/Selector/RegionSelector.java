@@ -1,10 +1,10 @@
 package Sergey_Dertan.SRegionProtector.Region.Selector;
 
-import cn.nukkit.Player;
-import cn.nukkit.block.Block;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.registry.Registries;
-import cn.nukkit.utils.RuntimeBlockDefinition;
+import org.powernukkitx.Player;
+import org.powernukkitx.block.Block;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.registry.Registries;
+import org.powernukkitx.utils.RuntimeBlockDefinition;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;

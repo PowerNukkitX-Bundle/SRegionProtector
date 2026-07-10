@@ -3,8 +3,8 @@ package Sergey_Dertan.SRegionProtector.Command.Admin;
 import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Main.SRegionProtectorMain;
 import Sergey_Dertan.SRegionProtector.Provider.DataProvider;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParameter;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
 import java.util.ArrayList;

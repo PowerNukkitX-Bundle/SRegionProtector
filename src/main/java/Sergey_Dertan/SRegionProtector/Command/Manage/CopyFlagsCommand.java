@@ -4,9 +4,9 @@ import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Region.Flags.RegionFlags;
 import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
-import cn.nukkit.command.CommandSender;
+import org.powernukkitx.command.CommandSender;
 import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
+import org.powernukkitx.command.data.CommandParameter;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
 import java.util.Map;

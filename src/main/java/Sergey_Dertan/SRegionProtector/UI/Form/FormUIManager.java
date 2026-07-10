@@ -5,11 +5,11 @@ import Sergey_Dertan.SRegionProtector.Region.Region;
 import Sergey_Dertan.SRegionProtector.Region.RegionManager;
 import Sergey_Dertan.SRegionProtector.UI.Form.Element.Button;
 import Sergey_Dertan.SRegionProtector.UI.Form.Type.UIForm;
-import cn.nukkit.Player;
-import cn.nukkit.form.element.simple.ElementButton;
-import cn.nukkit.form.response.Response;
-import cn.nukkit.form.response.SimpleResponse;
-import cn.nukkit.form.window.Form;
+import org.powernukkitx.Player;
+import org.powernukkitx.form.element.simple.ElementButton;
+import org.powernukkitx.form.response.Response;
+import org.powernukkitx.form.response.SimpleResponse;
+import org.powernukkitx.form.window.Form;
 
 
 public abstract class FormUIManager {

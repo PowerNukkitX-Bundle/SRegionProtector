@@ -2,12 +2,12 @@ package Sergey_Dertan.SRegionProtector.Command.Creation;
 
 import Sergey_Dertan.SRegionProtector.Command.SRegionProtectorCommand;
 import Sergey_Dertan.SRegionProtector.Region.Selector.RegionSelector;
-import cn.nukkit.Player;
-import cn.nukkit.command.CommandSender;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.CommandSender;
 import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
-import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.level.Position;
-import cn.nukkit.math.Vector3;
+import org.powernukkitx.command.data.CommandParameter;
+import org.powernukkitx.level.Position;
+import org.powernukkitx.math.Vector3;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 
 import java.util.Map;

@@ -1,15 +1,15 @@
 package Sergey_Dertan.SRegionProtector.Region.Flags.Flag;
 
-import cn.nukkit.Server;
-import cn.nukkit.level.Level;
-import cn.nukkit.level.Position;
-import cn.nukkit.math.Vector3;
+import org.powernukkitx.Server;
+import org.powernukkitx.level.Level;
+import org.powernukkitx.level.Position;
+import org.powernukkitx.math.Vector3;
 
 @SuppressWarnings("unused")
 public final class RegionTeleportFlag extends RegionFlag {
 
     public Vector3 position;
-    public String level; //if level isn`t loaded flag wont work while using cn.nukkit.level.Position
+    public String level; //if level isn`t loaded flag wont work while using org.powernukkitx.level.Position
 
     public RegionTeleportFlag(boolean state, Vector3 position, String level) {
         super(state);
